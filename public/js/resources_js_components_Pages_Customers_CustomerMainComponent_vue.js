@@ -1376,8 +1376,49 @@ var render = function render() {
           }
         }, [_vm._v("mdi-delete")])];
       }
-    }], null, false, 3575722405)
-  })], 1)], 1)], 1)], 1)], 1) : _vm._e()], 1), _vm._v(" "), _c("v-row", {
+    }], null, false, 4181512613)
+  })], 1)], 1)], 1)], 1)], 1) : _vm._e(), _vm._v(" "), !Array.isArray(_vm.searchedData) ? _c("v-col", [_c("v-card", {
+    staticClass: "overflow-hidden rounded-xl blur shadow-blur",
+    attrs: {
+      flat: ""
+    }
+  }, [_c("v-card-text", [_c("v-container", {
+    attrs: {
+      fluid: ""
+    }
+  }, [_c("v-col", {
+    attrs: {
+      cols: "12"
+    }
+  }, [_c("p", {
+    staticClass: "headline font-weight-medium"
+  }, [_vm._v("\n                                Vyhledán jeden zákazník:\n                            ")]), _vm._v(" "), _c("v-divider"), _vm._v(" "), _c("div", {
+    staticClass: "mt-3"
+  }, [_c("span", {
+    staticClass: "mx-auto"
+  }, [_vm._v("\n                                " + _vm._s(_vm.searchedData.subscriberCode) + "\n                            ")]), _vm._v(" "), _c("span", {
+    staticClass: "mx-12"
+  }, [_vm._v("\n                                " + _vm._s(_vm.searchedData.subscriberFullName) + "\n                            ")]), _vm._v(" "), _c("span", [_c("v-icon", {
+    attrs: {
+      small: "",
+      color: "info"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.editLink(_vm.searchedData.subscriberCode);
+      }
+    }
+  }, [_vm._v("mdi-pencil")]), _vm._v(" "), _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "red"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.openWarningDialogForDelete(_vm.searchedData.subscriberCode);
+      }
+    }
+  }, [_vm._v("mdi-delete")])], 1)])], 1)], 1)], 1)], 1)], 1) : _vm._e()], 1), _vm._v(" "), _c("v-row", {
     staticClass: "center"
   }, [_c("v-dialog", {
     attrs: {

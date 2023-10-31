@@ -24,7 +24,10 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn type="submit" color="info" class="mx-3 rounded-lg"
+                            <v-btn
+                                type="submit"
+                                color="info"
+                                class="mx-3 rounded-lg"
                                 >Vyhledat</v-btn
                             >
                         </v-card-actions>
@@ -47,9 +50,7 @@
                                     <template v-slot:item.actions="{ item }">
                                         <v-icon
                                             @click="
-                                                editLink(
-                                                    item.subscriberCode
-                                                )
+                                                editLink(item.subscriberCode)
                                             "
                                             small
                                             color="info"
@@ -67,6 +68,53 @@
                                         >
                                     </template>
                                 </v-data-table>
+                            </v-col>
+                        </v-container>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col v-if="!Array.isArray(searchedData)">
+                <v-card
+                    class="overflow-hidden rounded-xl blur shadow-blur"
+                    flat
+                >
+                    <v-card-text>
+                        <v-container fluid>
+                            <v-col cols="12">
+                                <p class="headline font-weight-medium">
+                                    Vyhledán jeden zákazník:
+                                </p>
+                                <v-divider></v-divider>
+                                <div class="mt-3">
+                                    <span class="mx-auto">
+                                    {{ searchedData.subscriberCode }}
+                                </span>
+                                <span class="mx-12">
+                                    {{ searchedData.subscriberFullName }}
+                                </span>
+                                <span>
+                                    <v-icon
+                                        @click="
+                                            editLink(
+                                                searchedData.subscriberCode
+                                            )
+                                        "
+                                        small
+                                        color="info"
+                                        >mdi-pencil</v-icon
+                                    >
+                                    <v-icon
+                                        @click="
+                                            openWarningDialogForDelete(
+                                                searchedData.subscriberCode
+                                            )
+                                        "
+                                        small
+                                        color="red"
+                                        >mdi-delete</v-icon
+                                    >
+                                </span>
+                                </div>
                             </v-col>
                         </v-container>
                     </v-card-text>
