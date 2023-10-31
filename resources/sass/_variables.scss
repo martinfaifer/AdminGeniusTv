@@ -1,0 +1,115 @@
+// Typography
+$font-family-sans-serif: "Roboto", Roboto;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+.theme--dark.v-application {
+    background: #1a212c;
+}
+
+// .theme--dark.v-text-field {
+
+// }
+
+.theme--light.blur {
+    backdrop-filter: saturate(200%) blur(30px);
+    background-color: hsla(0, 0%, 100%, 0.8) !important;
+}
+
+.theme--light.shadow-blur {
+    box-shadow: inset 0 0 1px 1px hsla(0, 0%, 99.6%, 0.9),
+        0 20px 27px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme--dark.v-list {
+    background: #141720;
+}
+
+.theme--dark.v-list-item-group .theme--dark.v-list-item--active {
+    color: #141720;
+}
+
+.theme--dark.v-data-table {
+    background-color: #141720;
+}
+
+.theme--dark.v-navigation-drawer {
+    background-color: #141720;
+}
+
+.theme--dark.v-tabs-items {
+    background-color: #141720;
+}
+
+.theme--dark.v-tabs-items {
+    background-color: #141720;
+}
+
+.theme--light.v-data-table {
+    background-color: #ffffff;
+}
+
+
+
+.theme--dark.v-data-table.group__summary {
+    background: #141720;
+    color: #141720;
+}
+
+.theme--dark.v-alert {
+    background-color: #141720;
+}
+
+.theme--dark.v-card {
+    background: #141720;
+}
+
+.theme--dark.v-stepper {
+    background: #141720;
+}
+
+.theme--light.v-application {
+    background: #F8F9FA;
+}
+
+.theme--light.v-navigation-drawer {
+    background-color: #ffffff;
+}
+
+.theme--light.v-card {
+    color: #ffffff;
+}
+
+.theme--light.v-text-field {
+    color: #1E293B;
+}
+
+.theme--light.shadow-blur-error {
+    box-shadow: inset 0 0 0px 0px rgba(239, 82, 80, 0.9),
+        0 10px 14px 0 rgba(239, 82, 80, 0.3) !important;
+}
+
+.theme--dark.shadow-blur-info {
+    box-shadow: inset 0 0 0px 0px rgba(39, 86, 254, 0.9),
+        0 10px 14px 0 rgba(39, 86, 254, 0.2) !important;
+}
+
+.theme--light.shadow-blur-btn-info {
+    box-shadow: inset 0 0 0px 0px rgba(49, 143, 230, 0.9),
+        0 3px 4px 0 rgba(49, 143, 230, 0.2) !important;
+}
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$midnightBlue: #1a212c;
+$linearGradientError: linear-gradient(to right,#FD5D71,#EB0D0E);
+$linearGradientSuccess: linear-gradient(to right,#8EE72E,#20B236);

@@ -30,5 +30,13 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'nangu' => [
+        'url' => env('NANGU_WSDL_URL')
+    ],
+    'iptvdoku' => [
+        'url' => env('IPTVDOKU_URL'),
+        'username' => env('IPTVDOKU_USERNAME'),
+        'password' => env('IPTVDOKU_PASSWORD')
+    ]
 
 ];
