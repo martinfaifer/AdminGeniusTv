@@ -4,7 +4,7 @@ namespace App\Services\Nangu\Wsdl;
 
 class WsdlCreateIdentityService
 {
-    public function execute(string $subscriberCode, int $ispCode): string
+    public function execute(string $username, string $password, int $ispCode): string
     {
         $identityId = (new ConnectWsdlService())->connect(
             wsdl: "identity",
@@ -12,8 +12,8 @@ class WsdlCreateIdentityService
                 'Create' =>
                     [
                         "master" => true,
-                        "username" => $subscriberCode,
-                        "password" => $subscriberCode,
+                        "username" => $username,
+                        "password" => $password,
                         "pairingPin" => mt_rand(1000000000, 9999999999),
                         "ispCode" => $ispCode
                     ]

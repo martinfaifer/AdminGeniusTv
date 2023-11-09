@@ -46,9 +46,46 @@
                                         :error="errors.tariffCode"
                                     ></TarrifAutocomplete>
                                 </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <BaseInput
+                                        label="Uživatelské jméno do aplikace"
+                                        type="text"
+                                        :error="errors.identityName"
+                                        v-model="formData.identityName"
+                                    ></BaseInput>
+                                    <div class="mt-n6">
+                                        <small class="blue--text font-italic"
+                                            >Pokud není vyplněno použije se
+                                            subscription code</small
+                                        >
+                                    </div>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <BaseInput
+                                        label="Heslo do aplikace"
+                                        type="text"
+                                        :error="errors.identityPassword"
+                                        v-model="identityPassword"
+                                    ></BaseInput>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-btn
+                                        class="mx-3 rounded-lg"
+                                        color="info"
+                                        @click="generatePassword()"
+                                    >
+                                        Vygenerovat heslo
+                                    </v-btn>
+                                </v-col>
 
                                 <v-col cols="12">
-                                    <v-divider></v-divider>
+                                    <v-row>
+                                        <v-divider class="mx-3"></v-divider>
+                                        <span class="mt-n3">
+                                            Volitelná sekce
+                                        </span>
+                                        <v-divider class="mx-3"></v-divider>
+                                    </v-row>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="4" lg="4">
                                     <StbModelsAutocomplete
@@ -111,12 +148,22 @@ export default {
             loading: false,
             formData: [],
             errors: [],
+            identityPassword: "",
         };
     },
 
     methods: {
-        submitForm() {
-            axios
+        async generatePassword() {
+            await axios
+                .get("nangu/customer/generate-password")
+                .then((response) => {
+                    let password = response.data.data.password;
+                    this.identityPassword = password;
+                });
+        },
+        async submitForm() {
+            this.loading = true;
+            await axios
                 .post("nangu/customer", {
                     subscriberCode: this.formData.subscriberCode,
                     subscriptionCode: this.formData.subscriptionCode,
@@ -125,13 +172,18 @@ export default {
                     modelCode: this.formData.modelCode,
                     serialNumber: this.formData.serialNumber,
                     macAddress: this.formData.macAddress,
+                    identityName: this.formData.identityName,
+                    identityPassword: this.identityPassword,
                 })
                 .then((response) => {
                     this.$store.state.alerts = response.data;
                     this.formData = [];
+                    this.identityPassword = "";
+                    this.loading = false;
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors;
+                    this.loading = false;
                 });
         },
     },

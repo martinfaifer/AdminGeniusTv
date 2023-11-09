@@ -11,21 +11,21 @@ class SearchNanguController extends Controller
 {
     public function __invoke(string $search)
     {
-        // try {
-        $user = Auth::user();
-        $searchedData = (new SearchWsdlService())->execute($user->nanguIsp->isp_id, $search);
+        try {
+            $user = Auth::user();
+            $searchedData = (new SearchWsdlService())->execute($user->nanguIsp->isp_id, $search);
 
-        if ($searchedData['count'] == 0) {
-            return $this->error_response("Nepodařilo se vyhledat zákazníka");
+            if ($searchedData['count'] == 0) {
+                return $this->error_response("Nepodařilo se vyhledat zákazníka");
+            }
+
+            return $this->success_response(
+                message: "Vyhledáno",
+                data: $searchedData
+            );
+        } catch (\Throwable $th) {
+            return $this->error_response(message: "Nepodařilo se připojit k serveru!");
         }
-
-        return $this->success_response(
-            message: "Vyhledáno",
-            data: $searchedData
-        );
-        // } catch (\Throwable $th) {
-        //     return $this->error_response();
-        // }
     }
 }
 

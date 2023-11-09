@@ -15,31 +15,31 @@ class StbModelSeeder extends Seeder
     {
         if(!StbModel::first()) {
             StbModel::create([
-                'modelCode' => "Arris 1113L"
+                'modelCode' => "KREA-1113L"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP4205"
+                'modelCode' => "ARRISVIP4205"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP4302"
+                'modelCode' => "ARRISVIP4302"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP5202"
+                'modelCode' => "ARRIS-VIP5202"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP5305"
+                'modelCode' => "ARRISVIP5305"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP5305W"
+                'modelCode' => "ARRISVIP5305W"
             ]);
 
             StbModel::create([
-                'modelCode' => "VIP7300"
+                'modelCode' => "ARRISVIP7300"
             ]);
 
             StbModel::create([

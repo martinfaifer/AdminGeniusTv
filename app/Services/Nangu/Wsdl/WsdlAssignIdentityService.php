@@ -4,14 +4,14 @@ namespace App\Services\Nangu\Wsdl;
 
 class WsdlAssignIdentityService
 {
-    public function execute(string $subscriptionCode, string $identityId, int $ispCode)
+    public function execute(string $subscriptionStbAccountCode, string $identityId, int $ispCode)
     {
         (new ConnectWsdlService())->connect(
             wsdl: "subscription",
             params: [
                 'AssignIdentity' =>
                 [
-                    "subscriptionStbAccountCode" => $subscriptionCode,
+                    "subscriptionStbAccountCode" => $subscriptionStbAccountCode,
                     "identityId" => $identityId,
                     "ispCode" => $ispCode
                 ]

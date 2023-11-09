@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Nangu;
 
+use App\Actions\Nangu\GetIspCodeAction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Actions\Nangu\DeleteCustomerAction;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Actions\Nangu\StoreNewCustomerAction;
 use App\Actions\Nangu\GetSubscriberDetailAction;
@@ -28,6 +30,11 @@ class NanguCustomerController extends Controller
 
     public function destroy(string $subscriberCode)
     {
-        // 
+        (new DeleteCustomerAction())->execute(
+            subscriberCode: $subscriberCode,
+            ispCode: (new GetIspCodeAction())->execute()
+        );
+
+        return $this->success_response("Odebráno ...");
     }
 }

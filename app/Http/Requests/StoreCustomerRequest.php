@@ -23,14 +23,21 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // validate subscriber with subscription
             'subscriberCode' => ['required', 'string', new NanguExistsRule],
             'subscriptionCode' => ['required', 'string', new NanguExistsRule],
             'tariffCode' => ['required', 'string'],
             'localityCode' => ['required', 'string'],
             'puk' => ['nullable'],
+            
+            // validate stb
             'modelCode' => ['nullable', 'string'],
-            'serialNumber' => ['nullable', 'string',new  NanguExistsRule],
+            'serialNumber' => ['nullable', 'string', new NanguExistsRule],
             'macAddress' => ['nullable', 'string', new NanguExistsRule],
+            
+            // validate identity
+            'identityName' => ['string', 'max:250'],
+            'identityPassword' => ['required', 'string', 'min:8', 'max:64']
         ];
     }
 
@@ -46,9 +53,6 @@ class StoreCustomerRequest extends FormRequest
             'tariffCode.required' => "Vyberte tarif.",
             'tariffCode.string' => "Neplatný formát.",
 
-            'subscriberCode.required' => "Vypňte subscriber code.",
-            'subscriberCode.string' => "Neplatný formát.",
-
             'localityCode.required' => "Vypňte lokalitu.",
             'localityCode.string' => "Neplatný formát.",
 
@@ -62,7 +66,15 @@ class StoreCustomerRequest extends FormRequest
             'macAddress.string' => "Neplatný formát.",
 
             'ispCode.requried' => "Není nadefinován ISP.",
-            'ispCode.exists' => "Neexistující ISP."
+            'ispCode.exists' => "Neexistující ISP.",
+
+            'identityName.string' => "Neplatný formát.",
+            'identityName.max' => "Byl překročen maximální počet znaků 250.",
+
+            'identityPassword.required' => "Vyplňte heslo do aplikace.",
+            'identityPassword.string' => "Neplatný formát.",
+            'identityPassword.min' => "Minimální počet znaků je 8.",
+            'identityPassword.max' => "Byl překročen maximální počet znaků 64.",
         ];
     }
 }

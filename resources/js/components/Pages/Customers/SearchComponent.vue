@@ -85,36 +85,36 @@
                                     Vyhledán jeden zákazník:
                                 </p>
                                 <v-divider></v-divider>
-                                <div class="mt-3">
-                                    <span class="mx-auto">
-                                    {{ searchedData.subscriberCode }}
-                                </span>
-                                <span class="mx-12">
-                                    {{ searchedData.subscriberFullName }}
-                                </span>
-                                <span>
-                                    <v-icon
-                                        @click="
-                                            editLink(
-                                                searchedData.subscriberCode
-                                            )
-                                        "
-                                        small
-                                        color="info"
-                                        >mdi-pencil</v-icon
-                                    >
-                                    <v-icon
-                                        @click="
-                                            openWarningDialogForDelete(
-                                                searchedData.subscriberCode
-                                            )
-                                        "
-                                        small
-                                        color="red"
-                                        >mdi-delete</v-icon
-                                    >
-                                </span>
-                                </div>
+                                <v-row class="mt-3">
+                                    <v-col cols="12" sm="4" md="4" lg="4">
+                                        {{ searchedData.subscriberCode }}
+                                    </v-col>
+                                    <v-col cols="12" sm="4" md="4" lg="4">
+                                        {{ searchedData.subscriberFullName }}
+                                    </v-col>
+                                    <v-col cols="12" sm="4" md="4" lg="4">
+                                        <v-icon
+                                            @click="
+                                                editLink(
+                                                    searchedData.subscriberCode
+                                                )
+                                            "
+                                            small
+                                            color="info"
+                                            >mdi-pencil</v-icon
+                                        >
+                                        <v-icon
+                                            @click="
+                                                openWarningDialogForDelete(
+                                                    searchedData.subscriberCode
+                                                )
+                                            "
+                                            small
+                                            color="red"
+                                            >mdi-delete</v-icon
+                                        >
+                                    </v-col>
+                                </v-row>
                             </v-col>
                         </v-container>
                     </v-card-text>
@@ -212,6 +212,7 @@ export default {
                     if (response.data.status == "success") {
                         this.closeDialog();
                     }
+                    this.search();
                 });
         },
 

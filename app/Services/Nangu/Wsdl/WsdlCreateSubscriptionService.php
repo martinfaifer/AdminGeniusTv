@@ -2,10 +2,15 @@
 
 namespace App\Services\Nangu\Wsdl;
 
+use App\Actions\Nangu\CreateSubscriptionStbAccountCodeAction;
+
 class WsdlCreateSubscriptionService
 {
     public function execute(string $subscriberCode, string $subscriptionCode, string $tariffCode, string $localityCode, int $ispCode)
     {
+        // for create unique subscriptionStbAccountCode , where subscriptionCode is root
+        $subscriptionStbAccountCode = (new CreateSubscriptionStbAccountCodeAction())->execute($subscriptionCode);
+
         (new ConnectWsdlService())->connect(
             wsdl: "subscription",
             params: [
@@ -13,7 +18,7 @@ class WsdlCreateSubscriptionService
                     [
                         "subscriberCode" => $subscriberCode,
                         "subscriptionCode" => $subscriptionCode,
-                        "subscriptionStbAccountCode" => $subscriptionCode,
+                        "subscriptionStbAccountCode" => $subscriptionStbAccountCode,
                         "currencyCode" => "CZK",
                         "tariffCode" => $tariffCode,
                         "localityCode" => $localityCode,
@@ -23,6 +28,6 @@ class WsdlCreateSubscriptionService
             soap_call_parameter: "Create"
         );
 
-        return $subscriptionCode;
+        return $subscriptionStbAccountCode;
     }
 }

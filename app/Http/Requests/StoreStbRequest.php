@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\NanguExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNanguStbRequest extends FormRequest
+class StoreStbRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,25 +23,23 @@ class StoreNanguStbRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'subscriptionCode' => ['required', 'string'],
+            'subscriptionStbAccountCode' => ['required', 'string'],
             'modelCode' => ['required', 'string'],
             'serialNumber' => ['required', 'string', new NanguExistsRule],
-            'macAddress' => ['required', 'string', new NanguExistsRule],
-            'ispCode' => ['required', 'string'],
+            'macAddress' => ['required', 'string'],
         ];
     }
 
     public function messages()
     {
         return [
-            'modelCode.required' => "Vyplňte model",
+            'modelCode.required' => "Vyberte model.",
             'modelCode.string' => "Neplatný formát",
-
-            'serialNumber.required' => "Vyplňte sn",
+            'serialNumber.required' => "Vyplňte seriové číslo.",
             'serialNumber.string' => "Neplatný formát",
-
-            'macAddress.required' => "Vyplňte mac adresu",
+            'macAddress.required' => "Vyplňte mac.",
             'macAddress.string' => "Neplatný formát",
-
         ];
     }
 }

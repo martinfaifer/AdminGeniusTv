@@ -145,25 +145,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// import Search from "./_search/search.vue";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     user: function user() {
       return this.$store.state.user;
     }
   },
-  components: {
-    // Search,
-  },
+  components: {},
   data: function data() {
     return {};
   },
   methods: {
-    background: function background() {
-      if (this.$vuetify.theme.dark == false) {
-        return "background: rgba(248, 249, 250, 0.25);box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);border-radius: 10px;";
-      }
-      return "background: rgba(27, 33, 45, 0.25);box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);backdrop-filter: blur(4px);-webkit-backdrop-filter: blur(4px);border-radius: 10px;";
+    logout: function logout() {
+      var _this = this;
+      axios.post("logout").then(function (response) {
+        _this.$router.push("/login");
+      });
     }
   }
 });
@@ -341,11 +338,11 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("v-app-bar", {
-    style: _vm.background(),
     attrs: {
       fixed: "",
       dense: "",
-      flat: ""
+      flat: "",
+      color: "#F8F9FA"
     }
   }, [_c("v-spacer"), _vm._v(" "), _c("v-menu", {
     attrs: {
@@ -376,22 +373,9 @@ var render = function render() {
       width: "200px"
     }
   }, [_c("v-list-item", {
-    attrs: {
-      link: "",
-      to: "/user/prehled"
-    }
-  }, [_vm._v("\n                Uživatelský účet\n                "), _c("v-spacer"), _c("v-icon", {
-    attrs: {
-      color: "blue",
-      right: "",
-      "x-small": ""
-    }
-  }, [_vm._v("mdi-account-cog-outline")])], 1), _vm._v(" "), _c("v-divider", {
-    staticClass: "ml-2 mr-2"
-  }), _vm._v(" "), _c("v-list-item", {
     on: {
       click: function click($event) {
-        return _vm.logOut();
+        return _vm.logout();
       }
     }
   }, [_vm._v("\n                Odhlásit se\n                "), _c("v-spacer"), _c("v-icon", {
