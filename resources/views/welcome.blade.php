@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <style>
         * {
             text-transform: none !important;
@@ -23,8 +24,7 @@
     </style>
 </head>
 
-<body style="background-color: #F8F9FA">
-    {{-- registrace vuejs --}}
+<body >
     <v-app id="app">
         <router-view></router-view>
     </v-app>

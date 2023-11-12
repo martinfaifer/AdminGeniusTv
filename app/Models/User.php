@@ -24,7 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nangu_isp_id'
+        'nangu_isp_id',
+        'is_admin',
+        'crm_id'
     ];
 
     /**

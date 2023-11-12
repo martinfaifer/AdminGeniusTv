@@ -2190,6 +2190,9 @@ var Login = function Login() {
 var Navigation = function Navigation() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_navigation_Navigation_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/navigation/Navigation.vue */ "./resources/js/components/navigation/Navigation.vue"));
 };
+var MainComponent = function MainComponent() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Main_Main_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Pages/Main/Main.vue */ "./resources/js/components/Pages/Main/Main.vue"));
+};
 var CustomerMainComponent = function CustomerMainComponent() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Customers_CustomerMainComponent_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Pages/Customers/CustomerMainComponent.vue */ "./resources/js/components/Pages/Customers/CustomerMainComponent.vue"));
 };
@@ -2202,6 +2205,9 @@ var routes = [{
   children: [{
     path: "customers/:component/:customer?",
     component: CustomerMainComponent
+  }, {
+    path: ":component?/:subcomponent?",
+    component: MainComponent
   }
   // {
   //     path: "/user/:component",
@@ -65887,7 +65893,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Pages_Auth_LoginComponent_vue":1,"resources_js_components_navigation_Navigation_vue":1,"resources_js_components_Pages_Customers_CustomerMainComponent_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Pages_Auth_LoginComponent_vue":1,"resources_js_components_navigation_Navigation_vue":1,"resources_js_components_Pages_Main_Main_vue":1,"resources_js_components_Pages_Customers_CustomerMainComponent_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -1,0 +1,10 @@
+.dotted {
+    height: 100vh;
+    overflow-x: scroll;
+    background-color: #F8F9FA;
+    background-image: radial-gradient(#cfcdcd 10%, transparent 11%),
+      radial-gradient(#cfcdcd 10%, transparent 11%);
+    background-size: 15px 15px;
+    background-position: 0 0, 15px 15px;
+    background-repeat: repeat;;
+  }

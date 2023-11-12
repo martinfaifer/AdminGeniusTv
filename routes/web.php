@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Apps\AppController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Nangu\NanguStbController;
 use App\Http\Controllers\Nangu\StbModelController;
+use App\Http\Controllers\Tickets\TicketController;
+use App\Http\Controllers\News\MaintenanceController;
+use App\Http\Controllers\News\NewsChannelController;
 use App\Http\Controllers\Nangu\SearchNanguController;
 use App\Http\Controllers\Nangu\NanguCustomerController;
 use App\Http\Controllers\Nangu\NanguIdentityController;
@@ -21,15 +25,27 @@ Route::get('/', function () {
 
 // Auth
 Route::post('login', [AuthController::class, 'login']);
-Route::get('login', function() {
+
+Route::get('login', function () {
     redirect('/#/login');
 })->name('login');
 
-Route::middleware('auth.basic')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'show']);
     });
+
+    Route::prefix('news')->group(function () {
+        Route::get('channels-info', [NewsChannelController::class, 'index']);
+        Route::get('maintenances', [MaintenanceController::class, 'index']);
+    });
+
+    Route::prefix('apps')->group(function () {
+        Route::get('', [AppController::class, 'index']);
+    });
+
+    Route::get('tickets/{status?}', TicketController::class);
 
     // nangu
     Route::prefix('nangu')->group(function () {
@@ -69,10 +85,10 @@ Route::middleware('auth.basic')->group(function () {
                 Route::delete('identity/{identityId}/{subscriptionStbAccountCode}', [NanguIdentityController::class, 'destroy']);
                 Route::delete('{subscriptionCode}/{deviceId}', [NanguIdentityController::class, 'destroy_device']);
             });
+
             Route::get('{subscriberCode}', [NanguCustomerController::class, 'show']);
             Route::post('', [NanguCustomerController::class, 'store']);
             Route::delete('{subscriberCode}', [NanguCustomerController::class, 'destroy']);
         });
     });
-
 });

@@ -37,6 +37,15 @@ return [
         'url' => env('IPTVDOKU_URL'),
         'username' => env('IPTVDOKU_USERNAME'),
         'password' => env('IPTVDOKU_PASSWORD')
+    ],
+    'floweye' => [
+        'api_token' => env('FLOWEYE_API_TOKEN'),
+        'url' => env('FLOWEYE_URL')
+    ],
+    'iptvdoku' => [
+        'url' => env('IPTV_DOKU_API'),
+        'username' => env('IPTV_DOKU_USERNAME'),
+        'password' => env('IPTV_DOKU_PASSWORD')
     ]
 
 ];

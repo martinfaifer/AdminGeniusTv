@@ -17,6 +17,7 @@ Vue.config.silent = false;
 
 let Login = () => import("./components/Pages/Auth/LoginComponent.vue");
 let Navigation = () => import("./components/navigation/Navigation.vue");
+let MainComponent = () => import("./components/Pages/Main/Main.vue");
 let CustomerMainComponent = () =>
     import("./components/Pages/Customers/CustomerMainComponent.vue");
 // let PageNotFound = () => import("./components/404/404.vue");
@@ -30,6 +31,10 @@ let routes = [
             {
                 path: "customers/:component/:customer?",
                 component: CustomerMainComponent,
+            },
+            {
+                path: ":component?/:subcomponent?",
+                component: MainComponent,
             },
             // {
             //     path: "/user/:component",

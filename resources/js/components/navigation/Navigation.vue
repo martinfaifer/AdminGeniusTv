@@ -4,7 +4,7 @@
             <vertical-menu></vertical-menu>
             <side-bar></side-bar>
 
-            <v-main app>
+            <v-main app class="dotted">
                 <v-container fluid class="mr-16 mt-8">
                     <notification></notification>
                     <router-view class="mt-3"> </router-view>

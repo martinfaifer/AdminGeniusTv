@@ -1,11 +1,11 @@
 <template>
     <v-app-bar fixed dense flat color="#F8F9FA">
         <v-spacer></v-spacer>
-        <v-menu transition="scroll-y-transition">
+        <v-menu v-if="user.is_admin == true" transition="scroll-y-transition">
             <template v-slot:activator="{ on }">
                 <v-list-item-avatar>
                     <v-avatar style="cursor: pointer" size="32" fixed v-on="on">
-                        <v-icon color="black">mdi-account</v-icon>
+                        <v-icon color="black">mdi-cog</v-icon>
                     </v-avatar>
                 </v-list-item-avatar>
             </template>
