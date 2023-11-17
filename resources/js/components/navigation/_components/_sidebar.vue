@@ -14,7 +14,7 @@
                 app
                 class="flex fill-height d-flex justify-items-center"
                 color="#0f0f0f"
-                src="/images/cervene_pozadi-p-500.jpeg"
+                src="/Images/cervene_pozadi-p-500.jpeg"
                 style="filter: grayscale(0%)"
             >
                 <v-list>
