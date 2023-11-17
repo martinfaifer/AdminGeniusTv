@@ -724,7 +724,8 @@ var render = function render() {
       type: _vm.type,
       value: _vm.value,
       "error-messages": _vm.error,
-      outlined: ""
+      outlined: "",
+      clearable: ""
     },
     on: {
       input: function input($event) {

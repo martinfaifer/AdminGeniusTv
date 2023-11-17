@@ -10,6 +10,7 @@
             @input="updateValue($event)"
             :error-messages="error"
             outlined
+            clearable
         ></v-text-field>
     </div>
 </template>

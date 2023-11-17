@@ -16,14 +16,19 @@ class IndexAppsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if ($request->unsorted) {
+            return [
+                'count' => App::count(),
+                'apps' => App::with('category')->get()
+            ];
+        }
         $output = [];
         $categories = AppCategory::get();
         $output['count'] = $categories->count();
-        foreach($categories as $category) {
-            $output['apps'][$category->category] = App::where('app_category_id', $category->id)->get();
+        foreach ($categories as $category) {
+            $output['apps'][$category->category] = App::where('app_category_id', $category->id)->with('category')->get();
         }
 
         return $output;
-
     }
 }

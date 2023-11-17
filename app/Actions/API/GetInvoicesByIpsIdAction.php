@@ -13,11 +13,11 @@ class GetInvoicesByIpsIdAction
             return [];
         }
 
-        if (is_null($user->nangu_isp)) {
+        if (is_null($user->nanguIsp->isp_id)) {
             return [];
         }
 
         return Http::withBasicAuth(config('services.iptvdoku.username'), config('services.iptvdoku.password'))
-            ->get(config('services.iptvdoku.url').'v1/nangu/isps/reports/'.$user->nangu_isp)->json();
+            ->get(config('services.iptvdoku.url') . 'v1/nangu/isps/reports/' . $user->nanguIsp->isp_id)->json();
     }
 }

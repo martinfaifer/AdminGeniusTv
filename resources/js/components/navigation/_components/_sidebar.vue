@@ -14,136 +14,121 @@
                 app
                 class="flex fill-height d-flex justify-items-center"
                 color="#0f0f0f"
+                src="/images/cervene_pozadi-p-500.jpeg"
+                style="filter: grayscale(0%)"
             >
                 <v-list>
                     <v-list-item two-line>
-                        <v-list-item-content>
-                            <v-list-item-title class="white--text">
-                                {{ user.name }}
-                            </v-list-item-title >
-                            <v-list-item-subtitle class="white--text">
-                                {{ user.email }}
-                            </v-list-item-subtitle>
-                        </v-list-item-content>
+                        <v-menu offset-y>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-list-item-content v-bind="attrs" v-on="on">
+                                    <v-list-item-title
+                                        class="white--text font-weight-medium"
+                                    >
+                                        {{ user.name }}
+                                    </v-list-item-title>
+                                    <v-list-item-subtitle class="white--text">
+                                        {{ user.email }}
+                                        <v-icon color="white"
+                                            >mdi-menu-down</v-icon
+                                        >
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </template>
+                            <v-list color="#F8F9FA">
+                                <v-list-item dense @click="userZone()">
+                                    <v-list-item-icon>
+                                        <v-img
+                                            max-height="26"
+                                            max-width="26"
+                                            class="mx-auto"
+                                        >
+                                            <v-icon color="info" small>
+                                                mdi-account
+                                            </v-icon>
+                                        </v-img>
+                                    </v-list-item-icon>
+                                    <v-list-item-title>
+                                        Nastavení
+                                    </v-list-item-title>
+                                </v-list-item>
+                                <v-list-item dense @click="logout()">
+                                    <v-list-item-icon>
+                                        <v-img
+                                            max-height="26"
+                                            max-width="26"
+                                            class="mx-auto"
+                                        >
+                                            <v-icon color="red" small>
+                                                mdi-logout
+                                            </v-icon>
+                                        </v-img>
+                                    </v-list-item-icon>
+                                    <v-list-item-title>
+                                        Odhlásit se
+                                    </v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
                     </v-list-item>
                 </v-list>
 
                 <v-divider></v-divider>
-                <v-list>
-                    <v-list-item
-                        link
-                        nav
-                        v-for="item in items"
-                        :key="item.title"
-                        :to="item.link"
-                        class="white--text"
-                    >
-                        <v-list-item-icon>
-                            <v-img
-                                max-height="26"
-                                max-width="26"
-                                class="mx-auto"
-                            >
-                                <v-icon color="white"> {{ item.icon }} </v-icon>
-                            </v-img>
-                        </v-list-item-icon>
-                        <v-list-item-title class="ml-6 subtitle-1">
-                            {{ item.title }}</v-list-item-title
-                        >
-                    </v-list-item>
-                </v-list>
-                <v-divider></v-divider>
-                <v-list>
-                    <v-list-item
-                        link
-                        nav
-                        v-for="item in nanguCustomerMenuPart"
-                        :key="item.title"
-                        :to="item.link"
-                        class="white--text"
-                    >
-                        <v-list-item-icon>
-                            <v-img
-                                max-height="26"
-                                max-width="26"
-                                class="mx-auto"
-                            >
-                                <v-icon color="white"> {{ item.icon }} </v-icon>
-                            </v-img>
-                        </v-list-item-icon>
-                        <v-list-item-title class="ml-6 subtitle-1">
-                            {{ item.title }}</v-list-item-title
-                        >
-                    </v-list-item>
-                </v-list>
+                <MainSideBarItems
+                    v-if="$route.params.component != 'admin'"
+                ></MainSideBarItems>
+                <AdminSideBarItemsVue
+                    v-if="
+                        user.is_admin == true &&
+                        $route.params.component == 'admin'
+                    "
+                ></AdminSideBarItemsVue>
             </v-navigation-drawer>
         </v-row>
     </div>
 </template>
 <script>
 import axios from "axios";
-
+import MainSideBarItems from "./_mainSideBarItems.vue";
+import AdminSideBarItemsVue from "./_adminSideBarItems.vue";
 export default {
     data() {
         return {
             user: [],
             drawer: true,
-            items: [
-                {
-                    title: "Novinky",
-                    icon: "mdi-newspaper",
-                    link: "/news",
-                },
-                {
-                    title: "Aplikace",
-                    icon: "mdi-devices",
-                    link: "/apps",
-                },
-                {
-                    title: "Tikety",
-                    icon: "mdi-checkbox-marked-circle-plus-outline",
-                    link: "/tikets",
-                },
-                {
-                    title: "Fakturace",
-                    icon: "mdi-currency-usd",
-                    link: "/invoices",
-                },
-                {
-                    title: "Návody",
-                    icon: "mdi-help",
-                    link: "/help",
-                },
-            ],
-            nanguCustomerMenuPart: [
-                {
-                    title: "Založení zákazníka",
-                    icon: "mdi-account-multiple",
-                    link: "/customers/create",
-                },
-                {
-                    title: "Vyhledání zákazníka",
-                    icon: "mdi-magnify",
-                    link: "/customers/search",
-                },
-                // { title: "Users", icon: "mdi-account-group-outline" },
-            ],
         };
     },
-    components: {},
+    components: {
+        MainSideBarItems,
+        AdminSideBarItemsVue,
+    },
 
-    mounted() {
+    created() {
         this.index();
     },
     methods: {
         async index() {
-            await axios.get("users").then((response) => {
-                console.log(response.data.data);
-                if (response.data.status == "success") {
+            await axios
+                .get("users/auth")
+                .then((response) => {
                     this.user = response.data.data;
-                } else {
-                    this.$router.push("/login");
-                }
+                })
+                .catch((error) => {
+                    if (error.response.status == "401") {
+                        this.$router.push("/login");
+                    }
+                });
+        },
+
+        userZone() {
+            if (this.$route.params.component != "user") {
+                this.$router.push("/user");
+            }
+        },
+
+        logout() {
+            axios.post("logout").then((response) => {
+                this.$router.push("/login");
             });
         },
     },

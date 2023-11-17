@@ -24,10 +24,21 @@
                     </v-card-subtitle>
                     <v-card-text class="text--center">
                         <v-container fluid>
-                            <v-data-table
-                                :headers="headers"
-                                :items="items"
-                            ></v-data-table>
+                            <v-data-table :headers="headers" :items="items">
+                                <template v-slot:item.actions="{ item }">
+                                    <v-row>
+                                        <a
+                                            style="text-decoration: none"
+                                            target="_blank"
+                                            :href="item.path"
+                                        >
+                                            <v-icon color="green"
+                                                >mdi-download</v-icon
+                                            >
+                                        </a>
+                                    </v-row>
+                                </template>
+                            </v-data-table>
                         </v-container>
                     </v-card-text>
                 </v-card>
@@ -47,9 +58,9 @@ export default {
         return {
             apps: [],
             headers: [
-                {text: "Název",value: "name"},
-                {text: "Popis",value: "description",},
-                {text: "", value: "actions"}
+                { text: "Název", value: "name" },
+                { text: "Popis", value: "description" },
+                { text: "", value: "actions" },
             ],
         };
     },

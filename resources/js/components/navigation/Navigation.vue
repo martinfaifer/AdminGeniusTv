@@ -38,7 +38,7 @@ export default {
     methods: {
         index() {
             axios
-                .get("users")
+                .get("users/auth")
                 .then((response) => {
                     if (response.data.status != "success") {
                         this.$router.push("/login");

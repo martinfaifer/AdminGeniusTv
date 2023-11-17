@@ -2,10 +2,7 @@
     <div>
         <v-row>
             <v-col cols="12" sm="12" md="4" lg="4">
-                <ShareList
-                    card-title="Novinky"
-                    :news="news"
-                ></ShareList>
+                <ShareList card-title="Novinky" :news="news"></ShareList>
             </v-col>
             <v-col cols="12" sm="12" md="4" lg="4">
                 <ShareList
@@ -14,28 +11,10 @@
                 ></ShareList>
             </v-col>
             <v-col cols="12" sm="12" md="4" lg="4">
-                <v-card
-                    class="overflow-hidden rounded-xl blur shadow-blur"
-                    flat
-                    height="80vh"
-                >
-                    <v-card-subtitle>
-                        <v-row class="justify-center">
-                            <p
-                                class="mt-3 text-center caption font-weight-bold"
-                            >
-                                Nově nahrané aplikace
-                            </p>
-                        </v-row>
-                    </v-card-subtitle>
-                    <v-card-text class="text--center">
-                        <v-container fluid>
-                            <v-row>
-                                <!--  -->
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
-                </v-card>
+                <ShareList
+                    card-title="Nově nahrané aplikace"
+                    :news="appNews"
+                ></ShareList>
             </v-col>
         </v-row>
     </div>
@@ -53,6 +32,7 @@ export default {
         return {
             news: [],
             maintenances: [],
+            appNews: [],
             benched: 0,
         };
     },
@@ -60,6 +40,7 @@ export default {
     created() {
         this.getNews();
         this.getMaintenances();
+        this.getAppNews();
     },
     methods: {
         getNews() {
@@ -72,7 +53,13 @@ export default {
             axios.get("news/maintenances").then((response) => {
                 this.maintenances = response.data.data;
             });
-        }
+        },
+
+        getAppNews() {
+            axios.get("news/apps").then((response) => {
+                this.appNews = response.data.data;
+            });
+        },
     },
 };
 </script>

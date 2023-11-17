@@ -13,17 +13,21 @@ Vue.use(Vuetify);
 // Vue.use(VueMeta);
 // Vue.use(require("vue-shortkey"));
 
-Vue.config.silent = false;
+Vue.config.silent = true;
 
 let Login = () => import("./components/Pages/Auth/LoginComponent.vue");
 let Navigation = () => import("./components/navigation/Navigation.vue");
 let MainComponent = () => import("./components/Pages/Main/Main.vue");
 let CustomerMainComponent = () =>
     import("./components/Pages/Customers/CustomerMainComponent.vue");
-// let PageNotFound = () => import("./components/404/404.vue");
+let PageNotFound = () => import("./components/Pages/404/PageNotFound.vue");
 // let NotAuthorized = () => import("./components/Auth/403.vue");
 
 let routes = [
+    {
+        path: "/login",
+        component: Login,
+    },
     {
         path: "/",
         component: Navigation,
@@ -42,18 +46,14 @@ let routes = [
             // },
         ],
     },
-    {
-        path: "/login",
-        component: Login,
-    },
     // {
     //     path: "/403",
     //     component: NotAuthorized,
     // },
-    // {
-    //     path: "*",
-    //     component: PageNotFound,
-    // },
+    {
+        path: "*",
+        component: PageNotFound,
+    },
 ];
 
 const router = new VueRouter({

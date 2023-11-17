@@ -162,7 +162,10 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1 rounded-lg" @click="closeDialog()">
+                        <v-btn
+                            color="blue darken-1 rounded-lg"
+                            @click="closeDialog()"
+                        >
                             <span class="white--text"> Zavřít </span>
                         </v-btn>
                     </v-card-actions>
@@ -201,8 +204,13 @@ export default {
             this.tickets = [];
             this.loadingData = true;
             axios.get("tickets").then((response) => {
-                this.tickets = response.data.data;
-                this.loadingData = false;
+                if (response.data.status == "success") {
+                    this.tickets = response.data.data;
+                    this.loadingData = false;
+                } else {
+                    this.tickets = [];
+                    this.loadingData = false;
+                }
             });
         },
 
@@ -214,8 +222,13 @@ export default {
             this.tickets = [];
             this.loadingData = true;
             axios.get("tickets/closed").then((response) => {
-                this.tickets = response.data.data;
-                this.loadingData = false;
+                if (response.data.status == "success") {
+                    this.tickets = response.data.data;
+                    this.loadingData = false;
+                } else {
+                    this.tickets = [];
+                    this.loadingData = false;
+                }
             });
         },
 

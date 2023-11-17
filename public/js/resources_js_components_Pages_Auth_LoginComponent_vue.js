@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getUser: function getUser() {
       var _this = this;
-      axios.get("users").then(function (response) {
+      axios.get("users/auth").then(function (response) {
         if (response.data.status == "success") {
           _this.$store.state.user = response.data.data;
           _this.$router.push("/");

@@ -103,7 +103,7 @@ export default {
     methods: {
         getUser() {
             axios
-                .get("users")
+                .get("users/auth")
                 .then((response) => {
                     if (response.data.status == "success") {
                         this.$store.state.user = response.data.data;
