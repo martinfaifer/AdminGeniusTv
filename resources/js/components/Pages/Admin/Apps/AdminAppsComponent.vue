@@ -447,6 +447,7 @@ export default {
         },
 
         openUploadAppDialog() {
+            this.fileUploadLoader = false;
             this.uploadDialog = true;
         },
 
@@ -564,6 +565,7 @@ export default {
             this.deleteAppDialog = false;
             this.formData = [];
             this.errors = [];
+            this.file = [];
         },
     },
 };
