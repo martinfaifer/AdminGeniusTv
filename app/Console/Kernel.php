@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('nangu:fetch_isps')->daily();
+        $schedule->command('nangu:fetch_isps')->twiceDaily();
     }
 
     /**
