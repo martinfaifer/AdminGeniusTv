@@ -8,7 +8,7 @@ class StoreAppAction
 {
     public function execute(object $formData): bool
     {
-        try {
+        // try {
             $file = $formData->file('file');
             $name = uniqid() . '.' . $file->extension();
             $file->storeAs('public/apps', $name);
@@ -24,8 +24,8 @@ class StoreAppAction
                 title: $formData->file('file')->getClientOriginalName()
             );
             return true;
-        } catch (\Throwable $th) {
-            return false;
-        }
+        // } catch (\Throwable $th) {
+        //     return false;
+        // }
     }
 }
