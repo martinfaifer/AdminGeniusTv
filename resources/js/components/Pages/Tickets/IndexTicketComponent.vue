@@ -10,7 +10,7 @@
                         <v-container fluid>
                             <v-row>
                                 <v-col cols="12" sm="12" md="12" lg="12">
-                                    <v-tabs centered>
+                                    <v-tabs centered background-color="transparent" color="info">
                                         <v-tab @click="activesTicket()"
                                             >Aktivní</v-tab
                                         >
@@ -26,13 +26,15 @@
                                         </v-alert>
                                     </div>
                                     <div v-else>
-                                        <v-text-field
-                                            placeholder="Vyhledat"
-                                            v-model="search"
-                                            dense
-                                            autofocus
-                                            outlined
-                                        ></v-text-field>
+                                        <v-col cols="12" sm="12" md="6" lg="6">
+                                            <v-text-field
+                                                placeholder="Vyhledat tiket"
+                                                v-model="search"
+                                                dense
+                                                autofocus
+                                                clearable
+                                            ></v-text-field>
+                                        </v-col>
                                         <v-data-table
                                             :headers="headers"
                                             :items="tickets"
@@ -41,7 +43,7 @@
                                             loading-text="Načítání Vašich tiketů"
                                         >
                                             <template
-                                                v-slot:item.current_step="{
+                                                v-slot:item.current_step.inbox="{
                                                     item,
                                                 }"
                                             >
@@ -187,7 +189,7 @@ export default {
             ticketDetail: null,
             detailTicketDialog: false,
             headers: [
-                { text: "Tiket", align: "start", value: "current_step" },
+                { text: "Tiket", align: "start", value: "current_step.inbox" },
                 { text: "Zadání", value: "detail" },
                 { text: "Vytvořeno", value: "created_at" },
                 { text: "Stav", value: "current_step" },
@@ -204,13 +206,8 @@ export default {
             this.tickets = [];
             this.loadingData = true;
             axios.get("tickets").then((response) => {
-                if (response.data.status == "success") {
-                    this.tickets = response.data.data;
-                    this.loadingData = false;
-                } else {
-                    this.tickets = [];
-                    this.loadingData = false;
-                }
+                this.tickets = response.data.data;
+                this.loadingData = false;
             });
         },
 
@@ -222,13 +219,8 @@ export default {
             this.tickets = [];
             this.loadingData = true;
             axios.get("tickets/closed").then((response) => {
-                if (response.data.status == "success") {
-                    this.tickets = response.data.data;
-                    this.loadingData = false;
-                } else {
-                    this.tickets = [];
-                    this.loadingData = false;
-                }
+                this.tickets = response.data.data;
+                this.loadingData = false;
             });
         },
 

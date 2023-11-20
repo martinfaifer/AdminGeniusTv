@@ -82,9 +82,21 @@
                         <v-container fluid>
                             <v-row>
                                 <v-col cols="12">
+                                    <v-text-field
+                                        v-model="search"
+                                        preppend-inner-icon="mdi-magnify"
+                                        label="Vyhledat ..."
+                                        single-line
+                                        hide-details
+                                        autofocus
+                                    ></v-text-field>
+                                    <v-spacer></v-spacer>
+                                </v-col>
+                                <v-col cols="12">
                                     <v-data-table
                                         :headers="headersApps"
                                         :items="apps"
+                                        :search="search"
                                     >
                                         <template
                                             v-slot:item.actions="{ item }"
@@ -411,6 +423,7 @@ export default {
             errors: [],
             apps: [],
             file: [],
+            search: "",
             headersAppCategories: [
                 { text: "Kategorie", value: "category" },
                 { text: "", value: "actions" },

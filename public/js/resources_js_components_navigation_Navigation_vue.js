@@ -551,7 +551,7 @@ var render = function render() {
       fixed: "",
       app: "",
       color: "#0f0f0f",
-      src: "/images/cervene_pozadi-p-500.jpeg"
+      src: "/Images/cervene_pozadi-p-500.jpeg"
     },
     model: {
       value: _vm.drawer,
@@ -655,7 +655,7 @@ var render = function render() {
       fixed: "",
       dense: "",
       flat: "",
-      color: "#F8F9FA"
+      color: "transparent"
     }
   }, [_c("v-spacer"), _vm._v(" "), _vm.user.is_admin == true ? _c("v-tooltip", {
     attrs: {

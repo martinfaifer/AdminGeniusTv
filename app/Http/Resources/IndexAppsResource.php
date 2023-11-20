@@ -26,7 +26,7 @@ class IndexAppsResource extends JsonResource
         $categories = AppCategory::get();
         $output['count'] = $categories->count();
         foreach ($categories as $category) {
-            $output['apps'][$category->category] = App::where('app_category_id', $category->id)->with('category')->get();
+            $output['apps'][$category->category] = App::where('app_category_id', $category->id)->with('category')->orderBy('id', 'DESC')->get();
         }
 
         return $output;

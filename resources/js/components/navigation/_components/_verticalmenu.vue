@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar fixed dense flat color="#F8F9FA">
+    <v-app-bar fixed dense flat color="transparent">
         <v-spacer></v-spacer>
         <v-tooltip bottom v-if="user.is_admin == true">
             <template v-slot:activator="{ on, attrs }">

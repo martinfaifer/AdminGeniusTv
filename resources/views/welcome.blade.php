@@ -24,7 +24,7 @@
     </style>
 </head>
 
-<body >
+<body class="dotted">
     <v-app id="app">
         <router-view></router-view>
     </v-app>

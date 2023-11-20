@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="$route.params.component">
+        <div v-cloak v-if="$route.params.component">
             <v-container fluid>
                 <IndexNews v-if="$route.params.component == 'news'"></IndexNews>
                 <IndexApps
@@ -46,8 +46,7 @@
                 ></AdminTutorials>
 
                 <User v-else-if="$route.params.component == 'user'"></User>
-
-                <PageNotFound v-else></PageNotFound>
+                <!-- <PageNotFound v-else></PageNotFound> -->
             </v-container>
         </div>
         <div v-else>
@@ -58,21 +57,21 @@
     </div>
 </template>
 <script>
-import InfoAlert from "../../Notifications/_infoAlert";
-import IndexNews from "../News/IndexNewsComponent.vue";
-import IndexApps from "../Apps/IndexAppsComponent.vue";
-import IndexTickets from "../Tickets/IndexTicketComponent.vue";
-import Invoices from "../Invoices/IndexInvoiceComponent.vue";
-import Tutorials from "../Tutorials/IndexTutorialComponent.vue";
+let InfoAlert = () => import("../../Notifications/_infoAlert");
+let IndexNews = () => import("../News/IndexNewsComponent.vue");
+let IndexApps = () => import("../Apps/IndexAppsComponent.vue");
+let IndexTickets = () => import("../Tickets/IndexTicketComponent.vue");
+let Invoices = () => import("../Invoices/IndexInvoiceComponent.vue");
+let Tutorials = () => import("../Tutorials/IndexTutorialComponent.vue");
 
-import AdminNews from "../Admin/News/AdminNewsComponent.vue";
-import AdminApps from "../Admin/Apps/AdminAppsComponent.vue";
-import AdminUsers from "../Admin/Users/AdminUsers.vue";
-import AdminTutorials from "../Admin/Tutorials/AdminTutorials.vue";
+let AdminNews = () => import("../Admin/News/AdminNewsComponent.vue");
+let AdminApps = () => import("../Admin/Apps/AdminAppsComponent.vue");
+let AdminUsers = () => import("../Admin/Users/AdminUsers.vue");
+let AdminTutorials = () => import("../Admin/Tutorials/AdminTutorials.vue");
 
-import User from "../User/User.vue";
+let User = () => import("../User/User.vue");
 
-import PageNotFound from "../404/PageNotFound.vue";
+let PageNotFound = () => import("../404/PageNotFound.vue");
 export default {
     computed: {
         user() {

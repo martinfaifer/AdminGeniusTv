@@ -13,7 +13,7 @@
                 </v-row>
             </v-card-subtitle>
             <v-card-text class="text--center">
-                <v-container fluid>
+                <v-container v-if="news.length > 0" fluid>
                     <v-virtual-scroll
                         :bench="benched"
                         :items="news"
@@ -27,7 +27,9 @@
                                 @click="openNewsDetail(item)"
                             >
                                 <v-list-item-content>
-                                    <v-list-item-title class="font-weight-medium">
+                                    <v-list-item-title
+                                        class="font-weight-medium"
+                                    >
                                         {{ item.title }}
                                     </v-list-item-title>
                                     <v-list-item-subtitle>{{
@@ -40,12 +42,21 @@
                         </template>
                     </v-virtual-scroll>
                 </v-container>
+                <v-container fluid>
+                    <v-col cols="12">
+                        <InfoAlert
+                            alertText="Zatím není nic naplánováno."
+                        ></InfoAlert>
+                    </v-col>
+                </v-container>
             </v-card-text>
         </v-card>
         <v-row justify="center">
             <v-dialog v-model="newsDetailDialog" scrollable max-width="900px">
                 <v-card>
-                    <v-card-title class="black--text">{{ detail.title }}</v-card-title>
+                    <v-card-title class="black--text">{{
+                        detail.title
+                    }}</v-card-title>
                     <v-card-text style="height: 300px">
                         {{ detail.text }}
                     </v-card-text>
@@ -64,9 +75,12 @@
     </div>
 </template>
 <script>
+let InfoAlert = () => import("../../Notifications/_infoAlert.vue");
 export default {
     props: ["cardTitle", "news"],
-    components: {},
+    components: {
+        InfoAlert,
+    },
 
     data() {
         return {

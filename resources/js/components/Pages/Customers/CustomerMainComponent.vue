@@ -2,15 +2,15 @@
     <div>
         <div v-if="$route.params.component">
             <v-container fluid>
-                <StoreCustomerComponent
-                    v-if="$route.params.component == 'create'"
-                ></StoreCustomerComponent>
-                <SearchComponent
-                    v-if="$route.params.component == 'search'"
-                ></SearchComponent>
-                <EditCustomerComponent
-                    v-if="$route.params.component == 'edit'"
-                ></EditCustomerComponent>
+                    <StoreCustomerComponent
+                        v-if="$route.params.component == 'create'"
+                    ></StoreCustomerComponent>
+                    <SearchComponent
+                        v-if="$route.params.component == 'search'"
+                    ></SearchComponent>
+                    <EditCustomerComponent
+                        v-if="$route.params.component == 'edit'"
+                    ></EditCustomerComponent>
             </v-container>
         </div>
         <div v-else>
