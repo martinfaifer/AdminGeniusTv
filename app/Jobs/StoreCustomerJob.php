@@ -17,7 +17,7 @@ class StoreCustomerJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public object $formData, public $ispCode)
+    public function __construct(public $formData, public string $ispCode)
     {
         //
     }

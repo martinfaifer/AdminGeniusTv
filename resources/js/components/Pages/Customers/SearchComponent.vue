@@ -219,7 +219,8 @@ export default {
                     if (response.data.status == "success") {
                         this.closeDialog();
                     }
-                    this.search();
+                    this.searchText = "";
+                    this.searchedData = [];
                 });
         },
 

@@ -26,10 +26,10 @@ class NanguCustomerController extends Controller
     {
         $user = Auth::user();
 
-        StoreCustomerJob::dispatch($request, $user->nanguIsp->isp_id);
-        // return $storeNewCustomerAction->execute($request, $user->nanguIsp->isp_id) == true
-            return $this->success_response("Odesláno k založení...");
-            // : $this->error_response();
+        // StoreCustomerJob::dispatch($request, $user->nanguIsp->isp_id);
+        return $storeNewCustomerAction->execute($request, $user->nanguIsp->isp_id) == true
+            ? $this->success_response("Založeno")
+            : $this->error_response();
     }
 
     public function destroy(string $subscriberCode)
