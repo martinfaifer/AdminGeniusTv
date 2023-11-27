@@ -42,7 +42,7 @@
                         </template>
                     </v-virtual-scroll>
                 </v-container>
-                <v-container fluid>
+                <v-container v-else fluid>
                     <v-col cols="12">
                         <InfoAlert
                             alertText="Zatím není nic naplánováno."
