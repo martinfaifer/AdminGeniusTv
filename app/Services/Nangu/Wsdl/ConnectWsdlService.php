@@ -12,7 +12,6 @@ class ConnectWsdlService
     {
         // try {
         $this->soap = new SoapClient(config('services.nangu.url') . $this->available_endpoints($wsdl), [
-            "trace"      => 1,
             "exceptions" => true,
             // 'local_cert' => storage_path("/certificate/ISP-1.pem"),
             // 'passphrase' => storage_path("/certificate/ISP-1.key"),
