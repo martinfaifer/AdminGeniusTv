@@ -42,12 +42,14 @@ class DeleteCustomerAction
                         ispCode: $ispCode
                     );
 
+                    sleep(2);
                     // DELETE IDENTITY
                     $wsdlIdentityService->delete(
                         identityId: $identities['identities']['identityId'],
                         ispCode: $ispCode
                     );
 
+                    sleep(2);
                     // STB SECTION
                     $stbsData = $subscriptionService->show_stb(
                         subscriptionCode: $subscription['subscriptionCode'],
@@ -55,6 +57,7 @@ class DeleteCustomerAction
                         ispCode: $ispCode
                     );
 
+                    sleep(2);
                     // UNASSING STB ACCOUNT
                     $stbAccountService->unassing(
                         subscriptionCode: $subscription['subscriptionCode'],
@@ -62,16 +65,20 @@ class DeleteCustomerAction
                         ispCode: $ispCode
                     );
 
+
                     if (array_key_exists("stb", $stbsData)) {
+                        sleep(2);
                         // DELETE STB
                         $nanguWsdlStbService->delete(
                             serialNumber: $stbsData['stb']['serialNumber'],
                             macAddress: $stbsData['stb']['macAddress'],
                             ispCode: $ispCode
                         );
+
                     }
                 }
 
+                sleep(2);
                 // REMOVE SUBSCRIPTION
                 $subscriptionService->delete(
                     subscriptionCode: $subscription['subscriptionCode'],
@@ -91,8 +98,10 @@ class DeleteCustomerAction
                 // STB ACCOUNT SECTION
                 foreach ($stbAccountsData['subscriptionStbAccounts'] as $stbAccount) {
                     $identities = $wsdlIdentityService->show($stbAccount['subscriptionStbAccountCode'], $ispCode);
+                    sleep(2);
                     if (array_key_exists('identityId', $identities['identities'])) {
                         // UNASSIGN IDENTITY
+                        sleep(2);
                         $wsdlIdentityService->unassign(
                             subscriptionStbAccountCode: $stbAccount['subscriptionStbAccountCode'],
                             identityId: $identities['identities']['identityId'],
@@ -100,6 +109,7 @@ class DeleteCustomerAction
                         );
 
                         // DELETE IDENTITY
+                        sleep(2);
                         $wsdlIdentityService->delete(
                             identityId: $identities['identities']['identityId'],
                             ispCode: $ispCode
@@ -108,6 +118,7 @@ class DeleteCustomerAction
                         // IDENTITIES SECTION
                         foreach ($identities['identities'] as $identity) {
                             // UNASSIGN IDENTITY
+                            sleep(2);
                             $wsdlIdentityService->unassign(
                                 subscriptionStbAccountCode: $stbAccount['subscriptionStbAccountCode'],
                                 identityId: $identity['identityId'],
@@ -115,6 +126,7 @@ class DeleteCustomerAction
                             );
 
                             // DELETE IDENTITY
+                            sleep(2);
                             $wsdlIdentityService->delete(
                                 identityId: $identity['identityId'],
                                 ispCode: $ispCode
@@ -123,6 +135,7 @@ class DeleteCustomerAction
                     }
 
                     // UNASSING STB ACCOUNT
+                    sleep(2);
                     $stbAccountService->unassing(
                         subscriptionCode: $subscription['subscriptionCode'],
                         subscriptionStbAccountCode: $stbAccount['subscriptionStbAccountCode'],
@@ -130,6 +143,7 @@ class DeleteCustomerAction
                     );
 
                     // STB SECTION
+                    sleep(2);
                     $stbsData = $subscriptionService->show_stb(
                         subscriptionCode: $subscription['subscriptionCode'],
                         subscriptionStbAccountCode: $stbAccount['subscriptionStbAccountCode'],
@@ -138,6 +152,7 @@ class DeleteCustomerAction
 
                     if (array_key_exists("stb", $stbsData)) {
                         // DELETE STB
+                        sleep(2);
                         $nanguWsdlStbService->delete(
                             serialNumber: $stbsData['stb']['serialNumber'],
                             macAddress: $stbsData['stb']['macAddress'],

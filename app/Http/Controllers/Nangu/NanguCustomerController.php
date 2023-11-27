@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Nangu;
 
-use App\Actions\Nangu\GetIspCodeAction;
 use Illuminate\Http\Request;
+use App\Jobs\StoreCustomerJob;
+use App\Jobs\DeleteCustomerJob;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Actions\Nangu\GetIspCodeAction;
 use App\Actions\Nangu\DeleteCustomerAction;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Actions\Nangu\StoreNewCustomerAction;
@@ -23,18 +25,22 @@ class NanguCustomerController extends Controller
     public function store(StoreCustomerRequest $request, StoreNewCustomerAction $storeNewCustomerAction)
     {
         $user = Auth::user();
-        return $storeNewCustomerAction->execute($request, $user->nanguIsp->isp_id) == true
-            ? $this->success_response("Vytvořeno")
-            : $this->error_response();
+
+        StoreCustomerJob::dispatch($request, $user->nanguIsp->isp_id);
+        // return $storeNewCustomerAction->execute($request, $user->nanguIsp->isp_id) == true
+            return $this->success_response("Odesláno k založení...");
+            // : $this->error_response();
     }
 
     public function destroy(string $subscriberCode)
     {
-        (new DeleteCustomerAction())->execute(
-            subscriberCode: $subscriberCode,
-            ispCode: (new GetIspCodeAction())->execute()
-        );
 
-        return $this->success_response("Odebráno ...");
+        // (new DeleteCustomerAction())->execute(
+        //     subscriberCode: $subscriberCode,
+        //     ispCode: (new GetIspCodeAction())->execute()
+        // );
+
+        DeleteCustomerJob::dispatch($subscriberCode, (new GetIspCodeAction())->execute());
+        return $this->success_response("Odesláno k odebrání ...");
     }
 }

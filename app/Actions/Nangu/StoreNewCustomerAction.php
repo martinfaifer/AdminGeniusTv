@@ -19,7 +19,6 @@ class StoreNewCustomerAction
         (new WsdlCreateSubscriberService())->execute(subscriberCode: $formData->subscriberCode, ispCode: $ispCode);
 
         sleep(1);
-
         $subscriptionStbAccountCode = (new WsdlCreateSubscriptionService())->execute(
             subscriberCode: $formData->subscriberCode,
             subscriptionCode: $formData->subscriptionCode,
@@ -31,19 +30,20 @@ class StoreNewCustomerAction
         info("subscriptionStbAccountCode", [$subscriptionStbAccountCode]);
 
         sleep(1);
-
         $identityId = (new WsdlCreateIdentityService())->execute(
             username: is_null($formData->identityName) ? $formData->subscriptionCode : $formData->identityName,
             password: $formData->identityPassword,
             ispCode: $ispCode
         );
 
+        sleep(1);
         (new WsdlAssignIdentityService())->execute(
             subscriptionStbAccountCode: $subscriptionStbAccountCode,
             identityId: $identityId,
             ispCode: $ispCode
         );
 
+        sleep(1);
         (new WsdlEnableSubscriptionService())->execute(
             subscriptionCode: $formData->subscriptionCode,
             subscriptionStbAccountCode: $subscriptionStbAccountCode,
@@ -52,6 +52,7 @@ class StoreNewCustomerAction
         );
 
         if (!is_null($formData->modelCode) || !is_null($formData->serialNumber) || !is_null($formData->macAddress)) {
+            sleep(1);
             (new WsdlStbService())->store(
                 modelCode: $formData->modelCode,
                 serialNumber: $formData->serialNumber,
@@ -59,6 +60,7 @@ class StoreNewCustomerAction
                 ispCode: $ispCode
             );
 
+            sleep(1);
             // assing stb
             (new WsdlStbService())->assign(
                 subscriptionCode: $formData->subscriptionCode,
