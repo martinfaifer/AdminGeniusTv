@@ -28,6 +28,8 @@ class StoreNewCustomerAction
             ispCode: $ispCode
         );
 
+        info("subscriptionStbAccountCode", [$subscriptionStbAccountCode]);
+
         sleep(1);
 
         $identityId = (new WsdlCreateIdentityService())->execute(
