@@ -10,19 +10,22 @@ class ConnectWsdlService
 
     public function connect(string $wsdl, array $params, string $soap_call_parameter)
     {
-        try {
-            $this->soap = new SoapClient(config('services.nangu.url') . $this->available_endpoints($wsdl), [
-                "exceptions" => true,
-            ] );
+        // try {
+        $this->soap = new SoapClient(config('services.nangu.url') . $this->available_endpoints($wsdl), [
+            "trace"      => 1,
+            "exceptions" => true,
+            // 'local_cert' => storage_path("/certificate/ISP-1.pem"),
+            // 'passphrase' => storage_path("/certificate/ISP-1.key"),
+        ]);
 
-            $soap_data = $this->soap->__soapCall($soap_call_parameter, $params);
+        $soap_data = $this->soap->__soapCall($soap_call_parameter, $params);
 
-            $response = json_decode(json_encode($soap_data), true);
+        $response = json_decode(json_encode($soap_data), true);
 
-            return $response;
-        } catch (\Throwable $th) {
-            return false;
-        }
+        return $response;
+        // } catch (\Throwable $th) {
+        //     return false;
+        // }
     }
 
 

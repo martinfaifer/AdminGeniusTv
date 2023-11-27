@@ -11,7 +11,7 @@ class SearchNanguController extends Controller
 {
     public function __invoke(string $search)
     {
-        try {
+        // try {
             $user = Auth::user();
             $searchedData = (new SearchWsdlService())->execute($user->nanguIsp->isp_id, $search);
 
@@ -23,9 +23,9 @@ class SearchNanguController extends Controller
                 message: "Vyhledáno",
                 data: $searchedData
             );
-        } catch (\Throwable $th) {
-            return $this->error_response(message: "Nepodařilo se připojit k serveru!");
-        }
+        // } catch (\Throwable $th) {
+        //     return $this->error_response(message: "Nepodařilo se připojit k serveru!");
+        // }
     }
 }
 

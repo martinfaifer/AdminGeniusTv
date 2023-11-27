@@ -24,8 +24,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:250'],
             'email' => ['required', 'email', 'max:250', 'unique:users,email'],
-            'nangu_isp_id' => ['nullable', 'exists:nangu_isps,id'],
-            'crm_id' => ['nullable'],
+            'nangu_isp_id' => ['required', 'exists:nangu_isps,id'],
+            'crm_id' => ['required'],
             'is_admin' => ['nullable', 'boolean']
         ];
     }

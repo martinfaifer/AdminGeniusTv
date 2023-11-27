@@ -28,6 +28,7 @@
                                 type="submit"
                                 color="info"
                                 class="mx-3 rounded-lg"
+                                :loading="searchLoading"
                                 >Vyhledat</v-btn
                             >
                         </v-card-actions>
@@ -150,6 +151,7 @@
                             @click="deleteItem()"
                             plain
                             outlined
+                            :loading="deleteLoading"
                         >
                             Odebrat
                         </v-btn>
@@ -168,6 +170,8 @@ export default {
 
     data() {
         return {
+            deleteLoading: false,
+            searchLoading: false,
             searchText: "",
             errors: "",
             searchedData: [],
@@ -187,8 +191,10 @@ export default {
 
     methods: {
         search() {
+            this.searchLoading = true;
             axios.get("nangu/search/" + this.searchText).then((response) => {
                 this.$store.state.alerts = response.data;
+                this.searchLoading = false;
                 if (response.data.status == "success") {
                     this.searchedData = response.data.data.subscribers;
                 }
@@ -205,6 +211,7 @@ export default {
         },
 
         deleteItem() {
+            this.deleteLoading = true;
             axios
                 .delete("nangu/customer/" + this.subscriberCode)
                 .then((response) => {
@@ -219,6 +226,7 @@ export default {
         closeDialog() {
             this.subscriberCode = "";
             this.warningDialog = false;
+            this.deleteLoading = false;
         },
     },
 };

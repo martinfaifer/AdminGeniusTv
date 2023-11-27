@@ -148,6 +148,7 @@ class DeleteCustomerAction
             }
         }
 
+        sleep(3);
         // delete subscriber -> subscriberCode
         (new DeleteSubscriberCodeService())->delete(
             subscriberCode: $subscriberCode,
