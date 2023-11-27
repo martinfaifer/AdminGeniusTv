@@ -28,7 +28,7 @@ class WsdlCreateSubscriptionService
             soap_call_parameter: "Create"
         );
 
-        dump([$subscriptionStbAccountCode]);
+        // dump([$subscriptionStbAccountCode]);
         return $subscriptionStbAccountCode;
     }
 }
