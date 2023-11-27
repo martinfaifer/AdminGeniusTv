@@ -14,18 +14,22 @@ class StoreNewCustomerAction
     public function execute(object $formData, $ispCode): bool
     {
         // try {
-        $subscriberCode = $formData->subscriberCode;
         $puk = $this->get_puk($formData);
 
-        (new WsdlCreateSubscriberService())->execute(subscriberCode: $subscriberCode, ispCode: $ispCode);
+        (new WsdlCreateSubscriberService())->execute(subscriberCode: $formData->subscriberCode, ispCode: $ispCode);
+
+        sleep(1);
 
         $subscriptionStbAccountCode = (new WsdlCreateSubscriptionService())->execute(
-            subscriberCode: $subscriberCode,
+            subscriberCode: $formData->subscriberCode,
             subscriptionCode: $formData->subscriptionCode,
             tariffCode: $formData->tariffCode,
             localityCode: $formData->localityCode,
             ispCode: $ispCode
         );
+
+        sleep(1);
+
         $identityId = (new WsdlCreateIdentityService())->execute(
             username: is_null($formData->identityName) ? $formData->subscriptionCode : $formData->identityName,
             password: $formData->identityPassword,
