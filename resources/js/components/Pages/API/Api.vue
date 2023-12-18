@@ -82,7 +82,7 @@
                                         <v-divider class="mx-3"></v-divider>
                                         <VueJsonPretty
                                             class="mt-3"
-                                            :data="{ apiResponse }"
+                                            :data="apiResponse"
                                         />
                                         <!-- {{ apiResponse }} -->
                                     </span>

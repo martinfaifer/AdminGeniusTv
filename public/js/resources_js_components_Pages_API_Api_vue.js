@@ -164,9 +164,7 @@ var render = function render() {
   }), _vm._v(" "), _c("VueJsonPretty", {
     staticClass: "mt-3",
     attrs: {
-      data: {
-        apiResponse: _vm.apiResponse
-      }
+      data: _vm.apiResponse
     }
   })], 1) : _vm._e()], 1)], 1)], 1)], 1)], 1)], 1)], 1)], 1);
 };
