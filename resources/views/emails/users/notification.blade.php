@@ -1,5 +1,5 @@
 <x-mail::message>
-    {{ $emailSubject }}: <br>
+    <b> {{ $emailSubject }}: </b><br>
     {{ $emailText }}
     S pozdravem,<br>
     Tým GeniusTV
