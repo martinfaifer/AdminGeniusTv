@@ -94,6 +94,18 @@ __webpack_require__.r(__webpack_exports__);
         _this3.errors = error.response.data.errors;
       });
     },
+    changeNotification: function changeNotification(state, notificatinType) {
+      var _this4 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("users/authentificate/notification", {
+        state: state,
+        notificationType: notificatinType
+      }).then(function (response) {
+        _this4.$store.state.alerts = response.data;
+        _this4.index();
+      })["catch"](function (error) {
+        _this4.errors = error.response.data.errors;
+      });
+    },
     closeDialog: function closeDialog() {
       this.editNameDialog = false;
       this.editPasswordDialog = false;
@@ -276,7 +288,111 @@ var render = function render() {
         return _vm.openPasswordDialog();
       }
     }
-  }, [_vm._v("Změnit heslo")])], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-row", {
+  }, [_vm._v("Změnit heslo")])], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "4",
+      lg: "4",
+      xl: "4"
+    }
+  }), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "4",
+      lg: "4",
+      xl: "4"
+    }
+  }, [_c("p", {
+    staticClass: "subtitle-2"
+  }, [_c("span", {
+    staticClass: "font-weight-medium mx-3"
+  }, [_vm._v("Upozornění na novinky:")]), _vm._v(" "), _vm.user.has_newsletter_notification == true ? _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "green"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(false, "has_newsletter_notification");
+      }
+    }
+  }, [_vm._v("mdi-check")]) : _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "red"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(true, "has_newsletter_notification");
+      }
+    }
+  }, [_vm._v("mdi-close")])], 1)]), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "4",
+      lg: "4",
+      xl: "4"
+    }
+  }, [_c("p", {
+    staticClass: "subtitle-2"
+  }, [_c("span", {
+    staticClass: "font-weight-medium mx-3"
+  }, [_vm._v("Upozornění na plánované\n                                        výpadky:")]), _vm._v(" "), _vm.user.has_maintenance_notification == true ? _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "green"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(false, "has_maintenance_notification");
+      }
+    }
+  }, [_vm._v("mdi-check")]) : _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "red"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(true, "has_maintenance_notification");
+      }
+    }
+  }, [_vm._v("mdi-close")])], 1)]), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "4",
+      lg: "4",
+      xl: "4"
+    }
+  }, [_c("p", {
+    staticClass: "subtitle-2"
+  }, [_c("span", {
+    staticClass: "font-weight-medium mx-3"
+  }, [_vm._v("Upozornění na nové aplikace:")]), _vm._v(" "), _vm.user.has_apps_notification == true ? _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "green"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(false, "has_apps_notification");
+      }
+    }
+  }, [_vm._v("mdi-check")]) : _c("v-icon", {
+    attrs: {
+      small: "",
+      color: "red"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.changeNotification(true, "has_apps_notification");
+      }
+    }
+  }, [_vm._v("mdi-close")])], 1)])], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-row", {
     staticClass: "center"
   }, [_c("v-dialog", {
     attrs: {

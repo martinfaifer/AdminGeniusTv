@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\AppNews;
+use App\Models\Maintenance;
+use App\Models\Topic;
+use App\Observers\AppNewsObserver;
+use App\Observers\MaintenanceObserver;
+use App\Observers\NewsObserver;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,7 +31,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Topic::observe(NewsObserver::class);
+        Maintenance::observe(MaintenanceObserver::class);
+        AppNews::observe(AppNewsObserver::class);
     }
 
     /**

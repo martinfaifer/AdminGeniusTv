@@ -22,10 +22,11 @@ use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Nangu\GetNanguTarrifsController;
 use App\Http\Controllers\Nangu\NanguLocalitiesController;
 use App\Http\Controllers\Nangu\NanguStbAccountController;
+use App\Http\Controllers\User\UserNotificationController;
 use App\Http\Controllers\Nangu\GeneratePasswordController;
+use App\Http\Controllers\User\AuthentificateUserController;
 use App\Http\Controllers\Nangu\UpdateSubscriptionTarrifController;
 use App\Http\Controllers\Nangu\UpdateSubscriptionLocalityController;
-use App\Http\Controllers\User\AuthentificateUserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,9 +42,10 @@ Route::get('login', function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::prefix('users')->group(function () {
-        Route::prefix('authentificate')->group(function() {
+        Route::prefix('authentificate')->group(function () {
             Route::patch('name', [AuthentificateUserController::class, 'update_name']);
             Route::patch('password', [AuthentificateUserController::class, 'update_password']);
+            Route::patch('notification', UserNotificationController::class);
         });
         Route::get('', [UserController::class, 'index'])->middleware('isAdmin');
         Route::get('auth', [UserController::class, 'show']);
@@ -68,7 +70,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('{maintenance}', [MaintenanceController::class, 'destroy'])->middleware('isAdmin');
         });
 
-        Route::prefix('apps')->group(function() {
+        Route::prefix('apps')->group(function () {
             Route::get('', [AppNewsController::class, 'index']);
         });
     });

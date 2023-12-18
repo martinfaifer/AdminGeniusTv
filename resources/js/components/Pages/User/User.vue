@@ -73,6 +73,115 @@
                                         >Změnit heslo</v-btn
                                     >
                                 </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4" xl="4">
+                                    <!-- empty space -->
+                                </v-col>
+                                <!-- newsletter notification -->
+                                <v-col cols="12" sm="12" md="4" lg="4" xl="4">
+                                    <p class="subtitle-2">
+                                        <span class="font-weight-medium mx-3"
+                                            >Upozornění na novinky:</span
+                                        >
+                                        <v-icon
+                                            v-if="
+                                                user.has_newsletter_notification ==
+                                                true
+                                            "
+                                            small
+                                            color="green"
+                                            @click="
+                                                changeNotification(
+                                                    false,
+                                                    'has_newsletter_notification'
+                                                )
+                                            "
+                                            >mdi-check</v-icon
+                                        >
+                                        <v-icon
+                                            v-else
+                                            small
+                                            color="red"
+                                            @click="
+                                                changeNotification(
+                                                    true,
+                                                    'has_newsletter_notification'
+                                                )
+                                            "
+                                            >mdi-close</v-icon
+                                        >
+                                    </p>
+                                </v-col>
+                                <!-- maintenance notification -->
+                                <v-col cols="12" sm="12" md="4" lg="4" xl="4">
+                                    <p class="subtitle-2">
+                                        <span class="font-weight-medium mx-3"
+                                            >Upozornění na plánované
+                                            výpadky:</span
+                                        >
+                                        <v-icon
+                                            v-if="
+                                                user.has_maintenance_notification ==
+                                                true
+                                            "
+                                            small
+                                            color="green"
+                                            @click="
+                                                changeNotification(
+                                                    false,
+                                                    'has_maintenance_notification'
+                                                )
+                                            "
+                                            >mdi-check</v-icon
+                                        >
+                                        <v-icon
+                                            v-else
+                                            small
+                                            color="red"
+                                            @click="
+                                                changeNotification(
+                                                    true,
+                                                    'has_maintenance_notification'
+                                                )
+                                            "
+                                            >mdi-close</v-icon
+                                        >
+                                    </p>
+                                </v-col>
+                                <!-- apps notification -->
+                                <v-col cols="12" sm="12" md="4" lg="4" xl="4">
+                                    <p class="subtitle-2">
+                                        <span class="font-weight-medium mx-3"
+                                            >Upozornění na nové aplikace:</span
+                                        >
+                                        <v-icon
+                                            v-if="
+                                                user.has_apps_notification ==
+                                                true
+                                            "
+                                            small
+                                            color="green"
+                                            @click="
+                                                changeNotification(
+                                                    false,
+                                                    'has_apps_notification'
+                                                )
+                                            "
+                                            >mdi-check</v-icon
+                                        >
+                                        <v-icon
+                                            v-else
+                                            small
+                                            color="red"
+                                            @click="
+                                                changeNotification(
+                                                    true,
+                                                    'has_apps_notification'
+                                                )
+                                            "
+                                            >mdi-close</v-icon
+                                        >
+                                    </p>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -217,6 +326,21 @@ export default {
                 .then((response) => {
                     this.$store.state.alerts = response.data;
                     this.closeDialog();
+                    this.index();
+                })
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
+                });
+        },
+
+        changeNotification(state, notificatinType) {
+            axios
+                .patch("users/authentificate/notification", {
+                    state: state,
+                    notificationType: notificatinType
+                })
+                .then((response) => {
+                    this.$store.state.alerts = response.data;
                     this.index();
                 })
                 .catch((error) => {

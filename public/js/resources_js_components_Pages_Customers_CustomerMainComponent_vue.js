@@ -552,6 +552,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      deleteLoading: false,
+      searchLoading: false,
       searchText: "",
       errors: "",
       searchedData: [],
@@ -573,8 +575,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     search: function search() {
       var _this = this;
+      this.searchLoading = true;
       axios.get("nangu/search/" + this.searchText).then(function (response) {
         _this.$store.state.alerts = response.data;
+        _this.searchLoading = false;
         if (response.data.status == "success") {
           _this.searchedData = response.data.data.subscribers;
         }
@@ -589,17 +593,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteItem: function deleteItem() {
       var _this2 = this;
+      this.deleteLoading = true;
       axios["delete"]("nangu/customer/" + this.subscriberCode).then(function (response) {
         _this2.$store.state.alerts = response.data;
         if (response.data.status == "success") {
           _this2.closeDialog();
         }
-        _this2.search();
+        _this2.searchText = "";
+        _this2.searchedData = [];
       });
     },
     closeDialog: function closeDialog() {
       this.subscriberCode = "";
       this.warningDialog = false;
+      this.deleteLoading = false;
     }
   }
 });
@@ -2013,7 +2020,8 @@ var render = function render() {
     staticClass: "mx-3 rounded-lg",
     attrs: {
       type: "submit",
-      color: "info"
+      color: "info",
+      loading: _vm.searchLoading
     }
   }, [_vm._v("Vyhledat")])], 1)], 1)], 1)], 1), _vm._v(" "), _vm.searchedData.length > 0 ? _c("v-col", {
     attrs: {
@@ -2163,7 +2171,8 @@ var render = function render() {
     attrs: {
       color: "red darken-1",
       plain: "",
-      outlined: ""
+      outlined: "",
+      loading: _vm.deleteLoading
     },
     on: {
       click: function click($event) {

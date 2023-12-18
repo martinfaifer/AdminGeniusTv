@@ -26,7 +26,10 @@ class User extends Authenticatable
         'password',
         'nangu_isp_id',
         'is_admin',
-        'crm_id'
+        'crm_id',
+        'has_newsletter_notification',
+        'has_maintenance_notification',
+        'has_apps_notification'
     ];
 
     /**
@@ -47,7 +50,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'is_admin' => 'boolean'
+        'is_admin' => 'boolean',
+        'has_newsletter_notification' => 'boolean',
+        'has_maintenance_notification' => 'boolean',
+        'has_apps_notification' => 'boolean',
     ];
 
 

@@ -209,7 +209,7 @@ var render = function render() {
         }, [_vm._v("\n                                    " + _vm._s(item.title) + "\n                                ")]), _vm._v(" "), _c("v-list-item-subtitle", [_vm._v(_vm._s(item.text))])], 1)], 1), _vm._v(" "), _c("v-divider")];
       }
     }], null, false, 1676932862)
-  })], 1) : _vm._e(), _vm._v(" "), _c("v-container", {
+  })], 1) : _c("v-container", {
     attrs: {
       fluid: ""
     }
