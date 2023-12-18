@@ -190,10 +190,15 @@ __webpack_require__.r(__webpack_exports__);
         link: "/customers/search"
       }
       // { title: "Users", icon: "mdi-account-group-outline" },
-      ]
+      ],
+
+      api: [{
+        title: "API",
+        icon: "mdi-api",
+        link: "/api"
+      }]
     };
   },
-
   components: {},
   mounted: function mounted() {},
   methods: {}
@@ -483,6 +488,28 @@ var render = function render() {
       staticClass: "ml-6 subtitle-1 font-weight-medium"
     }, [_vm._v("\n                " + _vm._s(item.title))])], 1);
   }), 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _c("v-list", _vm._l(_vm.nanguCustomerMenuPart, function (item) {
+    return _c("v-list-item", {
+      key: item.title,
+      staticClass: "white--text",
+      attrs: {
+        link: "",
+        nav: "",
+        to: item.link
+      }
+    }, [_c("v-list-item-icon", [_c("v-img", {
+      staticClass: "mx-auto",
+      attrs: {
+        "max-height": "26",
+        "max-width": "26"
+      }
+    }, [_c("v-icon", {
+      attrs: {
+        color: "white"
+      }
+    }, [_vm._v(" " + _vm._s(item.icon) + " ")])], 1)], 1), _vm._v(" "), _c("v-list-item-title", {
+      staticClass: "ml-6 subtitle-1 font-weight-medium"
+    }, [_vm._v("\n                " + _vm._s(item.title))])], 1);
+  }), 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _c("v-list", _vm._l(_vm.api, function (item) {
     return _c("v-list-item", {
       key: item.title,
       staticClass: "white--text",

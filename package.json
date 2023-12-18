@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "vue": "^2.6.14",
+        "vue-json-pretty": "^1.9.5",
         "vue-router": "^3.5.3",
         "vue-shortkey": "^3.1.7",
         "vuetify": "^2.6.7",

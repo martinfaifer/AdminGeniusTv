@@ -11,6 +11,7 @@ use App\Http\Controllers\Nangu\NanguStbController;
 use App\Http\Controllers\Nangu\StbModelController;
 use App\Http\Controllers\Tickets\TicketController;
 use App\Http\Controllers\Invoice\InvoiceController;
+use App\Http\Controllers\API\ApiEndPointsController;
 use App\Http\Controllers\Apps\AppCategoryController;
 use App\Http\Controllers\News\MaintenanceController;
 use App\Http\Controllers\News\NewsChannelController;
@@ -147,4 +148,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('{subscriberCode}', [NanguCustomerController::class, 'destroy']);
         });
     });
+
+    // API
+    Route::get('api-endpoints', ApiEndPointsController::class);
 });

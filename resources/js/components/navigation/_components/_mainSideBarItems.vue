@@ -39,6 +39,26 @@
                 >
             </v-list-item>
         </v-list>
+        <v-divider></v-divider>
+        <v-list>
+            <v-list-item
+                link
+                nav
+                v-for="item in api"
+                :key="item.title"
+                :to="item.link"
+                class="white--text"
+            >
+                <v-list-item-icon>
+                    <v-img max-height="26" max-width="26" class="mx-auto">
+                        <v-icon color="white"> {{ item.icon }} </v-icon>
+                    </v-img>
+                </v-list-item-icon>
+                <v-list-item-title class="ml-6 subtitle-1 font-weight-medium">
+                    {{ item.title }}</v-list-item-title
+                >
+            </v-list-item>
+        </v-list>
     </div>
 </template>
 <script>
@@ -86,6 +106,14 @@ export default {
                     link: "/customers/search",
                 },
                 // { title: "Users", icon: "mdi-account-group-outline" },
+            ],
+
+            api: [
+                {
+                    title: "API",
+                    icon: "mdi-api",
+                    link: "/api",
+                },
             ],
         };
     },

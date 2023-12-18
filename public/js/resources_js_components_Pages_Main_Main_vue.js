@@ -44,6 +44,9 @@ var AdminTutorials = function AdminTutorials() {
 var User = function User() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_User_User_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../User/User.vue */ "./resources/js/components/Pages/User/User.vue"));
 };
+var Api = function Api() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_API_Api_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../API/Api.vue */ "./resources/js/components/Pages/API/Api.vue"));
+};
 var PageNotFound = function PageNotFound() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_404_PageNotFound_vue-_6c661").then(__webpack_require__.bind(__webpack_require__, /*! ../404/PageNotFound.vue */ "./resources/js/components/Pages/404/PageNotFound.vue"));
 };
@@ -65,7 +68,8 @@ var PageNotFound = function PageNotFound() {
     AdminUsers: AdminUsers,
     AdminTutorials: AdminTutorials,
     PageNotFound: PageNotFound,
-    User: User
+    User: User,
+    Api: Api
   },
   data: function data() {
     return {};
@@ -92,7 +96,7 @@ var render = function render() {
     attrs: {
       fluid: ""
     }
-  }, [_vm.$route.params.component == "news" ? _c("IndexNews") : _vm.$route.params.component == "apps" ? _c("IndexApps") : _vm.$route.params.component == "tikets" ? _c("IndexTickets") : _vm.$route.params.component == "invoices" ? _c("Invoices") : _vm.$route.params.component == "help" ? _c("Tutorials") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "news" ? _c("AdminNews") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "apps" ? _c("AdminApps") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "users" ? _c("AdminUsers") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "help" ? _c("AdminTutorials") : _vm.$route.params.component == "user" ? _c("User") : _vm._e()], 1)], 1) : _c("div", [_c("v-col", {
+  }, [_vm.$route.params.component == "news" ? _c("IndexNews") : _vm.$route.params.component == "apps" ? _c("IndexApps") : _vm.$route.params.component == "tikets" ? _c("IndexTickets") : _vm.$route.params.component == "invoices" ? _c("Invoices") : _vm.$route.params.component == "help" ? _c("Tutorials") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "news" ? _c("AdminNews") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "apps" ? _c("AdminApps") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "users" ? _c("AdminUsers") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "help" ? _c("AdminTutorials") : _vm.$route.params.component == "user" ? _c("User") : _vm.$route.params.component == "api" ? _c("Api") : _vm._e()], 1)], 1) : _c("div", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",

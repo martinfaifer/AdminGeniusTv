@@ -46,6 +46,7 @@
                 ></AdminTutorials>
 
                 <User v-else-if="$route.params.component == 'user'"></User>
+                <Api v-else-if="$route.params.component == 'api'"></Api>
                 <!-- <PageNotFound v-else></PageNotFound> -->
             </v-container>
         </div>
@@ -70,6 +71,7 @@ let AdminUsers = () => import("../Admin/Users/AdminUsers.vue");
 let AdminTutorials = () => import("../Admin/Tutorials/AdminTutorials.vue");
 
 let User = () => import("../User/User.vue");
+let Api = () => import("../API/Api.vue");
 
 let PageNotFound = () => import("../404/PageNotFound.vue");
 export default {
@@ -91,6 +93,7 @@ export default {
         AdminTutorials,
         PageNotFound,
         User,
+        Api
     },
 
     data() {

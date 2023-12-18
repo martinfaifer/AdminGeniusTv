@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('has_newsletter_notification')->default(false);
+            $table->boolean('has_newsletter_notification')->default(true);
             $table->boolean('has_maintenance_notification')->default(true);
             $table->boolean('has_apps_notification')->default(false);
         });
