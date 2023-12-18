@@ -25,6 +25,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      method: "",
+      currentEndPoint: "",
       apiResponse: null,
       items: [],
       loading: false
@@ -47,6 +49,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     showResult: function showResult(method, endpoint) {
       var _this2 = this;
+      this.method = method;
+      this.currentEndPoint = endpoint;
       this.loading = true;
       if (method == "GET") {
         axios__WEBPACK_IMPORTED_MODULE_2___default().get(endpoint).then(function (response) {
@@ -129,7 +133,6 @@ var render = function render() {
       staticClass: "mx-2"
     }, [_vm._v("\n                                                        " + _vm._s(item.endpoint) + "\n                                                    ")])])], 1)], 1);
   }), 1)], 1)], 1), _vm._v(" "), _c("v-col", {
-    staticClass: "mt-12",
     staticStyle: {
       "overflow-y": "scroll",
       height: "70vh"
@@ -144,7 +147,22 @@ var render = function render() {
     attrs: {
       type: "article"
     }
-  }, "v-skeleton-loader", _vm.attrs, false)) : _vm._e(), _vm._v(" "), _vm.apiResponse != null ? _c("span", [_c("VueJsonPretty", {
+  }, "v-skeleton-loader", _vm.attrs, false)) : _vm._e(), _vm._v(" "), _vm.apiResponse != null ? _c("span", [_c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "12",
+      lg: "12"
+    }
+  }, [_c("span", {
+    staticClass: "font-italic"
+  }, [_c("span", {
+    staticClass: "font-weight-bold",
+    "class": _vm.getTextColor(_vm.method)
+  }, [_vm._v(_vm._s(_vm.method))]), _vm._v(" "), _c("span", [_vm._v("https://admin.geniustv.cz" + _vm._s(_vm.currentEndPoint))])])]), _vm._v(" "), _c("v-divider", {
+    staticClass: "mx-3"
+  }), _vm._v(" "), _c("VueJsonPretty", {
+    staticClass: "mt-3",
     attrs: {
       data: {
         apiResponse: _vm.apiResponse

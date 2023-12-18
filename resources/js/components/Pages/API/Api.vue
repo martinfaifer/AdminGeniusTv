@@ -50,7 +50,6 @@
                                     sm="10"
                                     md="10"
                                     lg="10"
-                                    class="mt-12"
                                     style="overflow-y: scroll; height: 70vh"
                                 >
                                     <v-skeleton-loader
@@ -59,7 +58,30 @@
                                         type="article"
                                     ></v-skeleton-loader>
                                     <span v-if="apiResponse != null">
+                                        <v-col
+                                            cols="12"
+                                            sm="12"
+                                            md="12"
+                                            lg="12"
+                                        >
+                                            <span class="font-italic">
+                                                <span
+                                                    :class="
+                                                        getTextColor(method)
+                                                    "
+                                                    class="font-weight-bold"
+                                                    >{{ method }}</span
+                                                >
+                                                <span
+                                                    >https://admin.geniustv.cz{{
+                                                        currentEndPoint
+                                                    }}</span
+                                                >
+                                            </span>
+                                        </v-col>
+                                        <v-divider class="mx-3"></v-divider>
                                         <VueJsonPretty
+                                            class="mt-3"
                                             :data="{ apiResponse }"
                                         />
                                         <!-- {{ apiResponse }} -->
@@ -85,6 +107,8 @@ export default {
 
     data() {
         return {
+            method: "",
+            currentEndPoint: "",
             apiResponse: null,
             items: [],
             loading: false,
@@ -108,6 +132,8 @@ export default {
         },
 
         showResult(method, endpoint) {
+            this.method = method;
+            this.currentEndPoint = endpoint;
             this.loading = true;
             if (method == "GET") {
                 axios.get(endpoint).then((response) => {
