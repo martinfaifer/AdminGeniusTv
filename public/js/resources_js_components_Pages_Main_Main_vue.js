@@ -29,6 +29,9 @@ var Invoices = function Invoices() {
 var Tutorials = function Tutorials() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Tutorials_IndexTutorialComponent_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Tutorials/IndexTutorialComponent.vue */ "./resources/js/components/Pages/Tutorials/IndexTutorialComponent.vue"));
 };
+var Marketing = function Marketing() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Marketing_IndexMarketing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Marketing/IndexMarketing.vue */ "./resources/js/components/Pages/Marketing/IndexMarketing.vue"));
+};
 var AdminNews = function AdminNews() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Admin_News_AdminNewsComponent_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Admin/News/AdminNewsComponent.vue */ "./resources/js/components/Pages/Admin/News/AdminNewsComponent.vue"));
 };
@@ -40,6 +43,9 @@ var AdminUsers = function AdminUsers() {
 };
 var AdminTutorials = function AdminTutorials() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Admin_Tutorials_AdminTutorials_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Admin/Tutorials/AdminTutorials.vue */ "./resources/js/components/Pages/Admin/Tutorials/AdminTutorials.vue"));
+};
+var AdminMarketing = function AdminMarketing() {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_Admin_Marting_AdminMarketingComponent_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Admin/Marting/AdminMarketingComponent.vue */ "./resources/js/components/Pages/Admin/Marting/AdminMarketingComponent.vue"));
 };
 var User = function User() {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Pages_User_User_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../User/User.vue */ "./resources/js/components/Pages/User/User.vue"));
@@ -69,7 +75,9 @@ var PageNotFound = function PageNotFound() {
     AdminTutorials: AdminTutorials,
     PageNotFound: PageNotFound,
     User: User,
-    Api: Api
+    Api: Api,
+    Marketing: Marketing,
+    AdminMarketing: AdminMarketing
   },
   data: function data() {
     return {};
@@ -96,7 +104,7 @@ var render = function render() {
     attrs: {
       fluid: ""
     }
-  }, [_vm.$route.params.component == "news" ? _c("IndexNews") : _vm.$route.params.component == "apps" ? _c("IndexApps") : _vm.$route.params.component == "tikets" ? _c("IndexTickets") : _vm.$route.params.component == "invoices" ? _c("Invoices") : _vm.$route.params.component == "help" ? _c("Tutorials") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "news" ? _c("AdminNews") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "apps" ? _c("AdminApps") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "users" ? _c("AdminUsers") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "help" ? _c("AdminTutorials") : _vm.$route.params.component == "user" ? _c("User") : _vm.$route.params.component == "api" ? _c("Api") : _vm._e()], 1)], 1) : _c("div", [_c("v-col", {
+  }, [_vm.$route.params.component == "news" ? _c("IndexNews") : _vm.$route.params.component == "apps" ? _c("IndexApps") : _vm.$route.params.component == "tikets" ? _c("IndexTickets") : _vm.$route.params.component == "invoices" ? _c("Invoices") : _vm.$route.params.component == "help" ? _c("Tutorials") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "news" ? _c("AdminNews") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "apps" ? _c("AdminApps") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "users" ? _c("AdminUsers") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "help" ? _c("AdminTutorials") : _vm.user.is_admin == true && _vm.$route.params.component == "admin" && _vm.$route.params.subcomponent == "marketing" ? _c("AdminMarketing") : _vm.$route.params.component == "user" ? _c("User") : _vm.$route.params.component == "api" ? _c("Api") : _vm.$route.params.component == "marketing" ? _c("Marketing") : _vm._e()], 1)], 1) : _c("div", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",

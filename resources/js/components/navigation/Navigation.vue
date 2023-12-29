@@ -23,6 +23,7 @@ export default {
     data() {
         return {
             alert: true,
+            permisions: [],
         };
     },
 
@@ -34,7 +35,9 @@ export default {
 
     created() {
         this.index();
+        this.getPermisions();
     },
+
     methods: {
         index() {
             axios
@@ -51,6 +54,12 @@ export default {
                         this.$router.push("/login");
                     }
                 });
+        },
+
+        getPermisions() {
+            axios.get("permisions").then((response) => {
+                this.permisions = response.data.data;
+            });
         },
     },
 

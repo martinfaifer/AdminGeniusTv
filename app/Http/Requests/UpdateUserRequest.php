@@ -24,7 +24,14 @@ class UpdateUserRequest extends FormRequest
         return [
             'nangu_isp_id' => ['nullable', 'exists:nangu_isps,id'],
             'crm_id' => ['nullable'],
-            'is_admin' => ['nullable']
+            'is_admin' => ['nullable'],
+            'show_news' => ['required', 'boolean'],
+            'show_apps' => ['required', 'boolean'],
+            'show_invoices' => ['required', 'boolean'],
+            'show_tutorials' => ['required', 'boolean'],
+            'show_nangu' => ['required', 'boolean'],
+            'show_api' => ['required', 'boolean'],
+            'show_tickets' => ['required', 'boolean'],
         ];
     }
 

@@ -45,7 +45,7 @@
                 <v-container v-else fluid>
                     <v-col cols="12">
                         <InfoAlert
-                            alertText="Zatím není nic naplánováno."
+                            alertText="Zatím nejsou žádná data."
                         ></InfoAlert>
                     </v-col>
                 </v-container>

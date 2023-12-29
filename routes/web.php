@@ -4,6 +4,7 @@ use App\Models\AppCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apps\AppController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PermisionController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\News\AppNewsController;
 use App\Http\Controllers\Nangu\NanguIspController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\News\MaintenanceController;
 use App\Http\Controllers\News\NewsChannelController;
 use App\Http\Controllers\Nangu\SearchNanguController;
 use App\Http\Controllers\Tutorials\TutorialController;
+use App\Http\Controllers\Marketing\MarketingController;
 use App\Http\Controllers\Nangu\NanguCustomerController;
 use App\Http\Controllers\Nangu\NanguIdentityController;
 use App\Http\Controllers\User\ChangePasswordController;
@@ -32,6 +34,8 @@ use App\Http\Controllers\Nangu\UpdateSubscriptionLocalityController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('permisions', PermisionController::class);
 
 // Auth
 Route::post('login', [AuthController::class, 'login']);
@@ -50,6 +54,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::get('', [UserController::class, 'index'])->middleware('isAdmin');
         Route::get('auth', [UserController::class, 'show']);
+        Route::get('{user}', [UserController::class, 'show_user']);
         Route::post('', [UserController::class, 'store'])->middleware('isAdmin');
         Route::patch('{user}', [UserController::class, 'update'])->middleware('isAdmin');
         Route::patch('{user}/password', ChangePasswordController::class)->middleware('isAdmin');
@@ -74,6 +79,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('apps')->group(function () {
             Route::get('', [AppNewsController::class, 'index']);
         });
+    });
+
+    Route::prefix('marketing')->group(function () {
+        Route::get('', [MarketingController::class, 'index']);
+        Route::post('', [MarketingController::class, 'store']);
+        Route::delete('{marketing}', [MarketingController::class, 'destroy']);
     });
 
     Route::prefix('apps')->group(function () {

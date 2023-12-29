@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
+use App\Models\Permision;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndexUsersResource extends JsonResource
+class PermisionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,6 +15,13 @@ class IndexUsersResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return User::with(['nanguIsp', 'permisions.permision'])->get()->toArray();
+        $output = [];
+        $permisions = Permision::get();
+
+        foreach($permisions as $permision) {
+            array_push($output, $permision->permision);
+        }
+
+        return $output;
     }
 }

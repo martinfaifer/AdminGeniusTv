@@ -288,6 +288,7 @@ export default {
     created() {
         this.index();
     },
+
     methods: {
         index() {
             axios.get("users/auth").then((response) => {

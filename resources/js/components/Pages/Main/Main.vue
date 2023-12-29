@@ -44,9 +44,19 @@
                         $route.params.subcomponent == 'help'
                     "
                 ></AdminTutorials>
+                <AdminMarketing
+                    v-else-if="
+                        user.is_admin == true &&
+                        $route.params.component == 'admin' &&
+                        $route.params.subcomponent == 'marketing'
+                    "
+                ></AdminMarketing>
 
                 <User v-else-if="$route.params.component == 'user'"></User>
                 <Api v-else-if="$route.params.component == 'api'"></Api>
+                <Marketing
+                    v-else-if="$route.params.component == 'marketing'"
+                ></Marketing>
                 <!-- <PageNotFound v-else></PageNotFound> -->
             </v-container>
         </div>
@@ -64,11 +74,14 @@ let IndexApps = () => import("../Apps/IndexAppsComponent.vue");
 let IndexTickets = () => import("../Tickets/IndexTicketComponent.vue");
 let Invoices = () => import("../Invoices/IndexInvoiceComponent.vue");
 let Tutorials = () => import("../Tutorials/IndexTutorialComponent.vue");
+let Marketing = () => import("../Marketing/IndexMarketing.vue");
 
 let AdminNews = () => import("../Admin/News/AdminNewsComponent.vue");
 let AdminApps = () => import("../Admin/Apps/AdminAppsComponent.vue");
 let AdminUsers = () => import("../Admin/Users/AdminUsers.vue");
 let AdminTutorials = () => import("../Admin/Tutorials/AdminTutorials.vue");
+let AdminMarketing = () =>
+    import("../Admin/Marting/AdminMarketingComponent.vue");
 
 let User = () => import("../User/User.vue");
 let Api = () => import("../API/Api.vue");
@@ -93,7 +106,9 @@ export default {
         AdminTutorials,
         PageNotFound,
         User,
-        Api
+        Api,
+        Marketing,
+        AdminMarketing,
     },
 
     data() {

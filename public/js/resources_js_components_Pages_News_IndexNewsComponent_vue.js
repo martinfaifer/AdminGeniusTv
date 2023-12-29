@@ -219,7 +219,7 @@ var render = function render() {
     }
   }, [_c("InfoAlert", {
     attrs: {
-      alertText: "Zatím není nic naplánováno."
+      alertText: "Zatím nejsou žádná data."
     }
   })], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-row", {
     attrs: {

@@ -12,6 +12,7 @@ use App\Actions\Users\UpdateUserAction;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\IndexUsersResource;
+use App\Http\Resources\ShowAsAdminUserResource;
 
 class UserController extends Controller
 {
@@ -25,8 +26,13 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return !is_null($user)
-            ? $this->success_response("Přihlášeno", Auth::user()->load('nanguIsp'))
+            ? $this->success_response("Přihlášeno", Auth::user()->load(['nanguIsp', 'permisions.permision']))
             : $this->error_response();
+    }
+
+    public function show_user(User $user)
+    {
+        return ShowAsAdminUserResource::make($user->load(['nanguIsp', 'permisions.permision']));
     }
 
     public function store(StoreUserRequest $request, StoreUserAction $storeUserAction)

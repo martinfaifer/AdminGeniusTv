@@ -71,7 +71,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Admin",
         value: "is_admin"
-      }, {
+      },
+      // { text: "Práva", value: "permisions" },
+      {
         text: "",
         value: "actions"
       }]
@@ -126,33 +128,43 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     openEditDialog: function openEditDialog(item) {
-      this.formData = item;
-      this.editDialog = true;
+      var _this5 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("users/" + item.id).then(function (response) {
+        _this5.formData = response.data.data;
+        _this5.editDialog = true;
+      });
     },
     openDeleteDialog: function openDeleteDialog(itemId) {
       this.formData.userId = itemId;
       this.deleteDialog = true;
     },
     deleteItem: function deleteItem() {
-      var _this5 = this;
+      var _this6 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("users/" + this.formData.userId).then(function (response) {
-        _this5.$store.state.alerts = response.data;
-        _this5.closeDialog();
-        _this5.index();
+        _this6.$store.state.alerts = response.data;
+        _this6.closeDialog();
+        _this6.index();
       });
     },
     editItem: function editItem() {
-      var _this6 = this;
+      var _this7 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("users/" + this.formData.id, {
         nangu_isp_id: this.formData.nangu_isp_id,
         crm_id: this.formData.crm_id,
         is_admin: this.formData.is_admin
+        // show_news: this.formData.permisions.show_news,
+        // show_apps: this.formData.permisions.show_apps,
+        // show_invoices: this.formData.permisions.show_invoices,
+        // show_tutorials: this.formData.permisions.show_tutorials,
+        // show_nangu: this.formData.permisions.show_nangu,
+        // show_api: this.formData.permisions.show_api,
+        // show_tickets: this.formData.permisions.show_tickets,
       }).then(function (response) {
-        _this6.$store.state.alerts = response.data;
-        _this6.closeDialog();
-        _this6.index();
+        _this7.$store.state.alerts = response.data;
+        _this7.closeDialog();
+        _this7.index();
       })["catch"](function (error) {
-        _this6.errors = error.response.data.errors;
+        _this7.errors = error.response.data.errors;
       });
     },
     closeDialog: function closeDialog() {
@@ -161,6 +173,15 @@ __webpack_require__.r(__webpack_exports__);
       this.createDialog = false;
       this.resetPasswordDialog = false;
       this.formData = [];
+    },
+    hasPermision: function hasPermision(itemPermision, userPermisions) {
+      var output = false;
+      userPermisions.forEach(function (element) {
+        if (element.permision.permision === itemPermision) {
+          output = true;
+        }
+      });
+      return output;
     }
   }
 });
@@ -294,9 +315,15 @@ var render = function render() {
         }, [_vm._v("mdi-close")])];
       }
     }, {
-      key: "item.actions",
+      key: "item.permisions",
       fn: function fn(_ref2) {
         var item = _ref2.item;
+        return undefined;
+      }
+    }, {
+      key: "item.actions",
+      fn: function fn(_ref3) {
+        var item = _ref3.item;
         return [_c("v-row", [_c("v-icon", {
           attrs: {
             small: "",
@@ -434,12 +461,34 @@ var render = function render() {
       },
       expression: "editDialog"
     }
-  }, [_c("v-card", [_c("v-card-text", [_c("v-container", {
+  }, [_c("v-card", [_vm.formData.id ? _c("v-card-text", [_c("v-container", {
     staticClass: "pt-12",
     attrs: {
       fluid: ""
     }
   }, [_c("v-row", [_c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "12",
+      lg: "12"
+    }
+  }, [_c("BaseInput", {
+    attrs: {
+      label: "Email",
+      type: "text",
+      error: _vm.errors.crm_id,
+      readonly: "",
+      disabled: ""
+    },
+    model: {
+      value: _vm.formData.email,
+      callback: function callback($$v) {
+        _vm.$set(_vm.formData, "email", $$v);
+      },
+      expression: "formData.email"
+    }
+  })], 1), _vm._v(" "), _c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
@@ -485,6 +534,16 @@ var render = function render() {
     }
   })], 1), _vm._v(" "), _c("v-col", {
     attrs: {
+      cols: "12"
+    }
+  }, [_c("v-row", [_c("v-divider", {
+    staticClass: "mx-3"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "mt-n2 caption"
+  }, [_vm._v("\n                                        Práva\n                                    ")]), _vm._v(" "), _c("v-divider", {
+    staticClass: "mx-3"
+  })], 1)], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
       cols: "12",
       sm: "12",
       md: "12",
@@ -502,7 +561,7 @@ var render = function render() {
       },
       expression: "formData.is_admin"
     }
-  })], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-card-actions", [_c("v-btn", {
+  })], 1)], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _c("v-card-actions", [_c("v-btn", {
     attrs: {
       color: "blue darken-1",
       plain: "",

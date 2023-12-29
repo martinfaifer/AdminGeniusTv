@@ -48,6 +48,11 @@ export default {
                     icon: "mdi-help",
                     link: "/admin/help",
                 },
+                {
+                    title: "Marketing",
+                    icon: "mdi-shopping",
+                    link: "/admin/marketing",
+                },
             ],
 
         };

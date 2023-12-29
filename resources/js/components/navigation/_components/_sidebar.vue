@@ -107,8 +107,8 @@ export default {
         this.index();
     },
     methods: {
-        async index() {
-            await axios
+        index() {
+            axios
                 .get("users/auth")
                 .then((response) => {
                     this.user = response.data.data;

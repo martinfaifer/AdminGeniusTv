@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
+use App\Models\Marketing;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndexUsersResource extends JsonResource
+class IndexMarketingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,6 +15,6 @@ class IndexUsersResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return User::with(['nanguIsp', 'permisions.permision'])->get()->toArray();
+        return Marketing::get()->toArray();
     }
 }

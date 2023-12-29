@@ -50,6 +50,36 @@
                                             >
                                         </template>
                                         <template
+                                            v-slot:item.permisions="{ item }"
+                                        >
+                                            <!-- <v-container fluid>
+                                                <v-row no-gutters>
+                                                    <v-col
+                                                        v-for="permision in item.permisions"
+                                                        :key="permision.id"
+                                                        cols="12"
+                                                        sm="12"
+                                                        md="4"
+                                                        lg="4"
+                                                        class="my-1"
+                                                    >
+                                                        <v-chip
+                                                            label
+                                                            color="blue"
+                                                            class="white--text"
+                                                            small
+                                                        >
+                                                            {{
+                                                                permision
+                                                                    .permision
+                                                                    .permision
+                                                            }}
+                                                        </v-chip>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-container> -->
+                                        </template>
+                                        <template
                                             v-slot:item.actions="{ item }"
                                         >
                                             <v-row>
@@ -169,9 +199,19 @@
 
             <v-dialog v-model="editDialog" persistent max-width="800px">
                 <v-card>
-                    <v-card-text>
+                    <v-card-text v-if="formData.id">
                         <v-container class="pt-12" fluid>
                             <v-row>
+                                <v-col cols="12" sm="12" md="12" lg="12">
+                                    <BaseInput
+                                        v-model="formData.email"
+                                        label="Email"
+                                        type="text"
+                                        :error="errors.crm_id"
+                                        readonly
+                                        disabled
+                                    ></BaseInput>
+                                </v-col>
                                 <v-col cols="12" sm="12" md="6" lg="6">
                                     <v-autocomplete
                                         v-model="formData.nangu_isp_id"
@@ -192,6 +232,15 @@
                                         :error="errors.crm_id"
                                     ></BaseInput>
                                 </v-col>
+                                <v-col cols="12">
+                                    <v-row>
+                                        <v-divider class="mx-3"></v-divider>
+                                        <span class="mt-n2 caption">
+                                            Práva
+                                        </span>
+                                        <v-divider class="mx-3"></v-divider>
+                                    </v-row>
+                                </v-col>
                                 <v-col cols="12" sm="12" md="12" lg="12">
                                     <v-checkbox
                                         v-model="formData.is_admin"
@@ -199,6 +248,60 @@
                                         :error="errors.is_admin"
                                     ></v-checkbox>
                                 </v-col>
+
+                                <!-- <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="formData.permisions.show_news"
+                                        label="Zobrazit Novinky"
+                                        :error="errors.show_news"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="formData.permisions.show_apps"
+                                        label="Zobrazit aplikace"
+                                        :error="errors.show_apps"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="
+                                            formData.permisions.show_invoices
+                                        "
+                                        label="Zobrazit faktury"
+                                        :error="errors.show_invoices"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="formData.permisions.tutorials"
+                                        label="Zobrazit návody"
+                                        :error="errors.tutorials"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="formData.permisions.show_nangu"
+                                        label="Zobrazit správu zákazníků"
+                                        :error="errors.show_nangu"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="
+                                            formData.permisions.show_tickets
+                                        "
+                                        label="Zobrazit tikety"
+                                        :error="errors.show_tickets"
+                                    ></v-checkbox>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="4" lg="4">
+                                    <v-checkbox
+                                        v-model="formData.permisions.show_api"
+                                        label="Zobrazit API"
+                                        :error="errors.show_api"
+                                    ></v-checkbox>
+                                </v-col> -->
                             </v-row>
                         </v-container>
                     </v-card-text>
@@ -325,6 +428,7 @@ export default {
                 { text: "Nangu ISP", value: "nangu_isp.name" },
                 { text: "CRM ID", value: "crm_id" },
                 { text: "Admin", value: "is_admin" },
+                // { text: "Práva", value: "permisions" },
                 { text: "", value: "actions" },
             ],
         };
@@ -386,8 +490,10 @@ export default {
         },
 
         openEditDialog(item) {
-            this.formData = item;
-            this.editDialog = true;
+            axios.get("users/" + item.id).then((response) => {
+                this.formData = response.data.data;
+                this.editDialog = true;
+            });
         },
 
         openDeleteDialog(itemId) {
@@ -409,6 +515,13 @@ export default {
                     nangu_isp_id: this.formData.nangu_isp_id,
                     crm_id: this.formData.crm_id,
                     is_admin: this.formData.is_admin,
+                    // show_news: this.formData.permisions.show_news,
+                    // show_apps: this.formData.permisions.show_apps,
+                    // show_invoices: this.formData.permisions.show_invoices,
+                    // show_tutorials: this.formData.permisions.show_tutorials,
+                    // show_nangu: this.formData.permisions.show_nangu,
+                    // show_api: this.formData.permisions.show_api,
+                    // show_tickets: this.formData.permisions.show_tickets,
                 })
                 .then((response) => {
                     this.$store.state.alerts = response.data;
@@ -426,6 +539,17 @@ export default {
             this.createDialog = false;
             this.resetPasswordDialog = false;
             this.formData = [];
+        },
+
+        hasPermision(itemPermision, userPermisions) {
+            let output = false;
+
+            userPermisions.forEach((element) => {
+                if (element.permision.permision === itemPermision) {
+                    output = true;
+                }
+            });
+            return output;
         },
     },
 };

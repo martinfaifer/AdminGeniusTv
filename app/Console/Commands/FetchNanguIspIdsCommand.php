@@ -32,12 +32,35 @@ class FetchNanguIspIdsCommand extends Command
             config('services.iptvdoku.password')
         )->get(config('services.iptvdoku.url') . "v1/nangu/isps");
 
-        if($response->successful()) {
+        if ($response->successful()) {
             foreach ($response->json()['data'] as $isp) {
-                NanguIsp::firstOrCreate(
-                    ['isp_id' =>  $isp['nangu_isp_id']],
-                    ['name' => $isp['nangu_isp']]
-                );
+                $searcheableIsp = NanguIsp::where('isp_id', $isp['nangu_isp_id'])->first();
+
+                switch ($searcheableIsp) {
+                        // kontrola zda je název ISP totožný
+                    case $searcheableIsp->name != $isp['nangu_isp']:
+                        $searcheableIsp->update([
+                            'name' => $isp['nangu_isp']
+                        ]);
+                        break;
+                        // nebylo nalezeno ISP
+                    case !$searcheableIsp:
+                        NanguIsp::create([
+                            'isp_id' => $isp['nangu_isp_id'],
+                            'name' => $isp['nangu_isp']
+                        ]);
+                        break;
+                    default:
+                        // for checking if isp exists
+                        $searcheableIsp->update([
+                            'updated_at' => date('Y-m-d G:i:s')
+                        ]);
+                }
+
+                // NanguIsp::firstOrCreate(
+                //     ['isp_id' =>  $isp['nangu_isp_id']],
+                //     ['name' => $isp['nangu_isp']]
+                // );
             }
         }
     }
