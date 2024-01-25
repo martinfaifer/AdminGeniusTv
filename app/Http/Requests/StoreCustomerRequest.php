@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EmptySpaceRule;
 use App\Rules\NanguExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,19 +25,19 @@ class StoreCustomerRequest extends FormRequest
     {
         return [
             // validate subscriber with subscription
-            'subscriberCode' => ['required', 'string', new NanguExistsRule],
-            'subscriptionCode' => ['required', 'string', new NanguExistsRule],
+            'subscriberCode' => ['required', 'string', 'min:4', new NanguExistsRule, new EmptySpaceRule],
+            'subscriptionCode' => ['required', 'string', 'min:4', new NanguExistsRule, new EmptySpaceRule],
             'tariffCode' => ['required', 'string'],
             'localityCode' => ['required', 'string'],
             'puk' => ['nullable'],
-            
+
             // validate stb
             'modelCode' => ['nullable', 'string'],
-            'serialNumber' => ['nullable', 'string', new NanguExistsRule],
-            'macAddress' => ['nullable', 'string', new NanguExistsRule],
-            
+            'serialNumber' => ['nullable', 'string', new NanguExistsRule, new EmptySpaceRule],
+            'macAddress' => ['nullable', 'string', new NanguExistsRule, new EmptySpaceRule],
+
             // validate identity
-            'identityName' => ['string', 'max:250'],
+            'identityName' => ['string', 'max:250', new NanguExistsRule, new EmptySpaceRule],
             'identityPassword' => ['required', 'string', 'min:8', 'max:64']
         ];
     }
@@ -46,9 +47,11 @@ class StoreCustomerRequest extends FormRequest
         return [
             'subscriberCode.required' => "Vypňte subscriber code.",
             'subscriberCode.string' => "Neplatný formát.",
+            'subscriberCode.min' => "Minimální počet znake je 4.",
 
             'subscriptionCode.required' => "Vypňte subscription code code.",
             'subscriptionCode.string' => "Neplatný formát.",
+            'subscriptionCode.min' => "Minimální počet znake je 4.",
 
             'tariffCode.required' => "Vyberte tarif.",
             'tariffCode.string' => "Neplatný formát.",
