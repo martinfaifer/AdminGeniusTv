@@ -47,11 +47,11 @@ class StoreCustomerRequest extends FormRequest
         return [
             'subscriberCode.required' => "Vypňte subscriber code.",
             'subscriberCode.string' => "Neplatný formát.",
-            'subscriberCode.min' => "Minimální počet znake je 4.",
+            'subscriberCode.min' => "Minimální počet znaků je 4.",
 
             'subscriptionCode.required' => "Vypňte subscription code code.",
             'subscriptionCode.string' => "Neplatný formát.",
-            'subscriptionCode.min' => "Minimální počet znake je 4.",
+            'subscriptionCode.min' => "Minimální počet znaků je 4.",
 
             'tariffCode.required' => "Vyberte tarif.",
             'tariffCode.string' => "Neplatný formát.",
