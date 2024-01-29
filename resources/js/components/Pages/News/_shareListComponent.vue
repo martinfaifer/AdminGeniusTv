@@ -19,7 +19,7 @@
                         :items="news"
                         height="900px"
                         max-height="800px"
-                        item-height="64"
+                        item-height="78"
                     >
                         <template v-slot:default="{ item }">
                             <v-list-item
@@ -35,6 +35,9 @@
                                     <v-list-item-subtitle>{{
                                         item.text
                                     }}</v-list-item-subtitle>
+                                    <v-list-item-subtitle class="font-italic text-end mt-1">
+                                        {{ item.created_at }}
+                                    </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
 

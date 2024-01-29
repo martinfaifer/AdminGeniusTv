@@ -191,7 +191,7 @@ var render = function render() {
       items: _vm.news,
       height: "900px",
       "max-height": "800px",
-      "item-height": "64"
+      "item-height": "78"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -206,9 +206,11 @@ var render = function render() {
           }
         }, [_c("v-list-item-content", [_c("v-list-item-title", {
           staticClass: "font-weight-medium"
-        }, [_vm._v("\n                                    " + _vm._s(item.title) + "\n                                ")]), _vm._v(" "), _c("v-list-item-subtitle", [_vm._v(_vm._s(item.text))])], 1)], 1), _vm._v(" "), _c("v-divider")];
+        }, [_vm._v("\n                                    " + _vm._s(item.title) + "\n                                ")]), _vm._v(" "), _c("v-list-item-subtitle", [_vm._v(_vm._s(item.text))]), _vm._v(" "), _c("v-list-item-subtitle", {
+          staticClass: "font-italic text-end mt-1"
+        }, [_vm._v("\n                                    " + _vm._s(item.created_at) + "\n                                ")])], 1)], 1), _vm._v(" "), _c("v-divider")];
       }
-    }], null, false, 1676932862)
+    }], null, false, 3018248133)
   })], 1) : _c("v-container", {
     attrs: {
       fluid: ""

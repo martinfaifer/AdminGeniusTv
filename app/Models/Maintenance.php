@@ -11,6 +11,10 @@ class Maintenance extends Model
         'title', 'text', 'user_id',
     ];
 
+    protected $casts = [
+        'created_at' => "date:d.m. Y"
+    ];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

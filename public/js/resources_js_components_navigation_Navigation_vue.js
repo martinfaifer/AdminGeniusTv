@@ -502,7 +502,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.user.permisions ? _c("div", [_c("v-list", _vm._l(_vm.items, function (item) {
+  return _c("div", [_c("v-list", _vm._l(_vm.items, function (item) {
     return _c("v-list-item", {
       key: item.title,
       staticClass: "white--text",
@@ -590,7 +590,7 @@ var render = function render() {
     }, [_vm._v(" " + _vm._s(item.icon) + " ")])], 1)], 1), _vm._v(" "), _c("v-list-item-title", {
       staticClass: "ml-6 subtitle-1 font-weight-medium"
     }, [_vm._v("\n                " + _vm._s(item.title))])], 1);
-  }), 1)], 1) : _vm._e();
+  }), 1)], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
