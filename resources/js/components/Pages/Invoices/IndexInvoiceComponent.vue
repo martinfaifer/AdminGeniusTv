@@ -64,7 +64,7 @@ export default {
             invoices: [],
             headers: [
                 {
-                    text: "Faktura za měsíc",
+                    text: "Report za měsíc",
                     align: "start",
                     value: "created_at",
                 },
@@ -85,8 +85,12 @@ export default {
 
         showCreated(created_at) {
             let dt = new Date(created_at);
-            let month = dt.getMonth() + 1;
+            let month = dt.getMonth();
             let year = dt.getFullYear();
+            if(month == 0) {
+                month = 12;
+                year = year - 1;
+            }
 
             return month + ". " + year;
         },

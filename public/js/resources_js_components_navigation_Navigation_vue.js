@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
         link: "/tikets",
         can: "show_tickets"
       }, {
-        title: "Fakturace",
+        title: "Reporty",
         icon: "mdi-currency-usd",
         link: "/invoices",
         can: "show_invoices"

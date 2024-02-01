@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
       search: "",
       invoices: [],
       headers: [{
-        text: "Faktura za měsíc",
+        text: "Report za měsíc",
         align: "start",
         value: "created_at"
       }, {
@@ -43,8 +43,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     showCreated: function showCreated(created_at) {
       var dt = new Date(created_at);
-      var month = dt.getMonth() + 1;
+      var month = dt.getMonth();
       var year = dt.getFullYear();
+      if (month == 0) {
+        month = 12;
+        year = year - 1;
+      }
       return month + ". " + year;
     },
     downloadInvoice: function downloadInvoice(path) {

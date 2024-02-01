@@ -113,7 +113,7 @@ export default {
                     can: "show_tickets",
                 },
                 {
-                    title: "Fakturace",
+                    title: "Reporty",
                     icon: "mdi-currency-usd",
                     link: "/invoices",
                     can: "show_invoices",
