@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Nangu\Wsdl;
 
 use App\Services\Nangu\Wsdl\ConnectWsdlService;
@@ -10,20 +11,22 @@ class GetSubscriberDetailService
         $subscriptions = [];
         $subscriber = (new SubscriberService())->show($subscriberCode, $ispCode);
 
-        if (array_key_exists('subscriptionCode', $subscriber['getSubscriptionsResponse']['subscriptions'])) {
-            $subscriptionsResponse = $subscriber['getSubscriptionsResponse'];
-        } else {
-            // vice polí
-            $subscriptionsResponse = $subscriber['getSubscriptionsResponse']['subscriptions'];
+        if (array_key_exists('subscriptions', $subscriber['getSubscriptionsResponse'])) {
+            if (array_key_exists('subscriptionCode', $subscriber['getSubscriptionsResponse']['subscriptions'])) {
+                $subscriptionsResponse = $subscriber['getSubscriptionsResponse'];
+            } else {
+                // vice polí
+                $subscriptionsResponse = $subscriber['getSubscriptionsResponse']['subscriptions'];
+            }
+
+            foreach ($subscriptionsResponse as $subscription) {
+                $subscriptions[] = (new SubscriptionService())->show(
+                    $subscription['subscriptionCode'],
+                    $ispCode
+                );
+            }
         }
 
-        foreach ($subscriptionsResponse as $subscription) {
-            $subscriptions[] = (new SubscriptionService())->show(
-                $subscription['subscriptionCode'],
-                $ispCode
-            );
-
-        }
 
         // foreach ($subscriptions as $subscription) {
         //     if (array_key_exists('subscriptionStbAccountCode', $subscription['getSubscriptionStbAccountsResponse']['subscriptionStbAccounts'])) {
