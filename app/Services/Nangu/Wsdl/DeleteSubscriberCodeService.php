@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Nangu\Wsdl;
 
 class DeleteSubscriberCodeService
@@ -9,12 +10,12 @@ class DeleteSubscriberCodeService
             wsdl: "subscriber",
             params: [
                 'disable' =>
-                    [
-                        "subscriberCode" => $subscriberCode
-                    ]
+                [
+                    "subscriberCode" => $subscriberCode,
+                    'ispCode' => $ispCode
+                ]
             ],
             soap_call_parameter: "disable"
         );
-
     }
 }
