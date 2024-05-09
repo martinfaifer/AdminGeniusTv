@@ -173,7 +173,7 @@ class DeleteCustomerAction
             //throw $th;
         }
 
-        sleep(3);
+        // sleep(3);
         // delete subscriber -> subscriberCode
         (new DeleteSubscriberCodeService())->delete(
             subscriberCode: $subscriberCode,
