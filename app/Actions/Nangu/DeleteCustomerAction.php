@@ -18,12 +18,16 @@ class DeleteCustomerAction
         $subscriptionService = new SubscriptionService();
         $nanguWsdlStbService = new NanguWsdlStbService();
 
-        $subscriberDetail = (new GetSubscriberDetailService())->show(
-            subscriberCode: $subscriberCode,
-            ispCode: $ispCode
-        );
+        try {
+            $subscriberDetail = (new GetSubscriberDetailService())->show(
+                subscriberCode: $subscriberCode,
+                ispCode: $ispCode
+            );
 
-        $subscriptions = $subscriberDetail['subscriber']['getSubscriptionsResponse'];
+            $subscriptions = $subscriberDetail['subscriber']['getSubscriptionsResponse'];
+        } catch (\Throwable $th) {
+            // nenalezeny subscriptions
+        }
 
         try {
             if (array_key_exists("subscriptionCode", $subscriptions['subscriptions'])) {
