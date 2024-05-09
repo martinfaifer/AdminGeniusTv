@@ -2,7 +2,6 @@
 
 namespace App\Actions\Nangu;
 
-use App\Jobs\DeleteCustomerJob;
 use App\Services\Nangu\Wsdl\SearchWsdlService;
 use App\Services\Nangu\Wsdl\StbAccountService;
 use App\Services\Nangu\Wsdl\NanguWsdlStbService;
@@ -177,20 +176,19 @@ class DeleteCustomerAction
 
         // sleep(3);
         // delete subscriber -> subscriberCode
-        DeleteCustomerJob::dispatch($subscriberCode, $ispCode);
-        // (new DeleteSubscriberCodeService())->delete(
-        //     subscriberCode: $subscriberCode,
-        //     ispCode: $ispCode
-        // );
+        (new DeleteSubscriberCodeService())->delete(
+            subscriberCode: $subscriberCode,
+            ispCode: $ispCode
+        );
 
-        // // check if customer exists
-        // $checkIfAreData = (new SearchWsdlService())->execute($ispCode, $subscriberCode);
-        // if ($checkIfAreData['count'] != 0) {
-        //     // problem, customer is not deleted
-        //     (new DeleteSubscriberCodeService())->delete(
-        //         subscriberCode: $subscriberCode,
-        //         ispCode: $ispCode
-        //     );
-        // }
+        // check if customer exists
+        $checkIfAreData = (new SearchWsdlService())->execute($ispCode, $subscriberCode);
+        if ($checkIfAreData['count'] != 0) {
+            // problem, customer is not deleted
+            (new DeleteSubscriberCodeService())->delete(
+                subscriberCode: $subscriberCode,
+                ispCode: $ispCode
+            );
+        }
     }
 }
