@@ -9,13 +9,13 @@ class DeleteSubscriberCodeService
         (new ConnectWsdlService())->connect(
             wsdl: "subscriber",
             params: [
-                'disable' =>
+                'Disable' =>
                 [
                     "subscriberCode" => $subscriberCode,
                     'ispCode' => $ispCode
                 ]
             ],
-            soap_call_parameter: "disable"
+            soap_call_parameter: "Disable"
         );
     }
 }

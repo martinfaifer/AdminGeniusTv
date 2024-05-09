@@ -2,6 +2,7 @@
 
 namespace App\Actions\Nangu;
 
+use App\Services\Nangu\Wsdl\SearchWsdlService;
 use App\Services\Nangu\Wsdl\StbAccountService;
 use App\Services\Nangu\Wsdl\NanguWsdlStbService;
 use App\Services\Nangu\Wsdl\SubscriptionService;
@@ -179,5 +180,15 @@ class DeleteCustomerAction
             subscriberCode: $subscriberCode,
             ispCode: $ispCode
         );
+
+        // check if customer exists
+        $checkIfAreData = (new SearchWsdlService())->execute($ispCode, $subscriberCode);
+        if ($checkIfAreData['count'] != 0) {
+            // problem, customer is not deleted
+            (new DeleteSubscriberCodeService())->delete(
+                subscriberCode: $subscriberCode,
+                ispCode: $ispCode
+            );
+        }
     }
 }
