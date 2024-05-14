@@ -174,22 +174,10 @@ class DeleteCustomerAction
             //throw $th;
         }
 
-        sleep(3);
         // delete subscriber -> subscriberCode
         (new DeleteSubscriberCodeService())->delete(
             subscriberCode: $subscriberCode,
             ispCode: $ispCode
         );
-
-        // check if customer exists
-        $checkIfAreData = (new SearchWsdlService())->execute($ispCode, $subscriberCode);
-        if ($checkIfAreData['count'] != 0) {
-            sleep(3);
-            // problem, customer is not deleted
-            (new DeleteSubscriberCodeService())->delete(
-                subscriberCode: $subscriberCode,
-                ispCode: $ispCode
-            );
-        }
     }
 }
