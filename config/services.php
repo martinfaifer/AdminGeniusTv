@@ -47,6 +47,11 @@ return [
         'username' => env('IPTV_DOKU_USERNAME'),
         'password' => env('IPTV_DOKU_PASSWORD')
     ],
+    'iptvdoku_new' => [
+        'url' => env('IPTV_DOKU_API_NEW'),
+        'username' => env('IPTV_DOKU_USERNAME_NEW'),
+        'password' => env('IPTV_DOKU_PASSWORD_NEW')
+    ],
     'crm' => [
         'url' => env('CRM_URL')
     ]

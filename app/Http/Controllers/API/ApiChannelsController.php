@@ -10,6 +10,6 @@ class ApiChannelsController extends Controller
 {
     public function __invoke()
     {
-        return Http::get(config('services.iptvdoku.url') . "v1/public/channels/")->json();
+        return Http::get(config('services.iptvdoku_new.url') . "v1/public/channels/")->json();
     }
 }
